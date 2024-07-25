@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4CEFDC27-812C-4D0F-E6FD-FDDAE05E9FC0}</ProjectGuid>
+    <ProjectGuid>{5B7FC7C1-8CD1-7D1B-6217-1F0B78F8281B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -75,6 +75,7 @@
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DepthBlit\DepthBlitFeature.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\LensFlares\Scripts\ScreenSpacePlacement.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DistortTunnel\DistortTunnelRendererFeature.cs" />
+    <Compile Include="Assets\action maps\PlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\SharedAssets\Shaders\3DText.shader" />
