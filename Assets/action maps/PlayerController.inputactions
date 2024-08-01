@@ -22,6 +22,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "3307f2fd-37f1-4551-bc81-48f24091cfa1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -155,6 +164,7 @@
                     "groups": "Gamepad",
                     "action": "Movement",
                     "isComposite": false,
+<<<<<<< Updated upstream
                     "isPartOfComposite": false
                 },
                 {
@@ -176,6 +186,18 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Movement",
+=======
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "90900678-f60c-495a-ac5f-9f27e0ce8ef4",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Jump",
+>>>>>>> Stashed changes
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
