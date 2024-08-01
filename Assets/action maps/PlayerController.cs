@@ -24,11 +24,11 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     ""name"": ""PlayerController"",
     ""maps"": [
         {
-            ""name"": ""navigating"",
+            ""name"": ""Player"",
             ""id"": ""4897034d-b84e-4a8d-a397-c1040cfd41c7"",
             ""actions"": [
                 {
-                    ""name"": ""Arrows"",
+                    ""name"": ""Movement"",
                     ""type"": ""Button"",
                     ""id"": ""5bd0383d-70b5-43ad-b169-dadab2b675ca"",
                     ""expectedControlType"": ""Button"",
@@ -37,25 +37,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""WASD"",
-                    ""type"": ""Button"",
-                    ""id"": ""04c8cd81-95ac-4506-9718-f4b066ad121b"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Left Stick [Gamepad]"",
-                    ""type"": ""Button"",
-                    ""id"": ""da6fccc2-5a18-4d8a-a2ec-025e11ca31cf"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Look Around"",
+                    ""name"": ""Look"",
                     ""type"": ""Value"",
                     ""id"": ""a87850ad-aded-479d-bcde-b421063a86c6"",
                     ""expectedControlType"": ""Vector2"",
@@ -71,8 +53,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Arrows"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -82,8 +64,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Arrows"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -93,8 +75,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Arrows"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -104,96 +86,8 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Arrows"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7cc98282-63f9-4a11-9153-958584f36fde"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WASD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a91ec054-a794-4bc7-aaa3-754b1ea82fdd"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WASD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1a522cc5-ffcb-4670-b847-809ce9229f04"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WASD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""01135960-0ba1-4704-b241-04d6189c4a9c"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""WASD"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ccd8b286-0b8e-49ce-8270-e67306937f26"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Left Stick [Gamepad]"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""5fa58b68-8423-46c1-8d92-fa829f52c395"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Left Stick [Gamepad]"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f09d413f-4a7e-4d80-8c08-e64f3bc67b91"",
-                    ""path"": ""<Gamepad>/leftStick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Left Stick [Gamepad]"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7d8e9401-69f1-49f3-926a-e0b7ec2ddd1d"",
-                    ""path"": ""<Gamepad>/leftStick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Left Stick [Gamepad]"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -204,7 +98,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Look Around"",
+                    ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -214,22 +108,131 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Look Around"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7cc98282-63f9-4a11-9153-958584f36fde"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a91ec054-a794-4bc7-aaa3-754b1ea82fdd"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a522cc5-ffcb-4670-b847-809ce9229f04"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""01135960-0ba1-4704-b241-04d6189c4a9c"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccd8b286-0b8e-49ce-8270-e67306937f26"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5fa58b68-8423-46c1-8d92-fa829f52c395"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f09d413f-4a7e-4d80-8c08-e64f3bc67b91"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d8e9401-69f1-49f3-926a-e0b7ec2ddd1d"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""Keyboard"",
+            ""bindingGroup"": ""Keyboard"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
-        // navigating
-        m_navigating = asset.FindActionMap("navigating", throwIfNotFound: true);
-        m_navigating_Arrows = m_navigating.FindAction("Arrows", throwIfNotFound: true);
-        m_navigating_WASD = m_navigating.FindAction("WASD", throwIfNotFound: true);
-        m_navigating_LeftStickGamepad = m_navigating.FindAction("Left Stick [Gamepad]", throwIfNotFound: true);
-        m_navigating_LookAround = m_navigating.FindAction("Look Around", throwIfNotFound: true);
+        // Player
+        m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -288,80 +291,80 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
-    // navigating
-    private readonly InputActionMap m_navigating;
-    private List<INavigatingActions> m_NavigatingActionsCallbackInterfaces = new List<INavigatingActions>();
-    private readonly InputAction m_navigating_Arrows;
-    private readonly InputAction m_navigating_WASD;
-    private readonly InputAction m_navigating_LeftStickGamepad;
-    private readonly InputAction m_navigating_LookAround;
-    public struct NavigatingActions
+    // Player
+    private readonly InputActionMap m_Player;
+    private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_Movement;
+    private readonly InputAction m_Player_Look;
+    public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
-        public NavigatingActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Arrows => m_Wrapper.m_navigating_Arrows;
-        public InputAction @WASD => m_Wrapper.m_navigating_WASD;
-        public InputAction @LeftStickGamepad => m_Wrapper.m_navigating_LeftStickGamepad;
-        public InputAction @LookAround => m_Wrapper.m_navigating_LookAround;
-        public InputActionMap Get() { return m_Wrapper.m_navigating; }
+        public PlayerActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_Player_Movement;
+        public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(NavigatingActions set) { return set.Get(); }
-        public void AddCallbacks(INavigatingActions instance)
+        public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
+        public void AddCallbacks(IPlayerActions instance)
         {
-            if (instance == null || m_Wrapper.m_NavigatingActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_NavigatingActionsCallbackInterfaces.Add(instance);
-            @Arrows.started += instance.OnArrows;
-            @Arrows.performed += instance.OnArrows;
-            @Arrows.canceled += instance.OnArrows;
-            @WASD.started += instance.OnWASD;
-            @WASD.performed += instance.OnWASD;
-            @WASD.canceled += instance.OnWASD;
-            @LeftStickGamepad.started += instance.OnLeftStickGamepad;
-            @LeftStickGamepad.performed += instance.OnLeftStickGamepad;
-            @LeftStickGamepad.canceled += instance.OnLeftStickGamepad;
-            @LookAround.started += instance.OnLookAround;
-            @LookAround.performed += instance.OnLookAround;
-            @LookAround.canceled += instance.OnLookAround;
+            if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            @Movement.started += instance.OnMovement;
+            @Movement.performed += instance.OnMovement;
+            @Movement.canceled += instance.OnMovement;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
         }
 
-        private void UnregisterCallbacks(INavigatingActions instance)
+        private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @Arrows.started -= instance.OnArrows;
-            @Arrows.performed -= instance.OnArrows;
-            @Arrows.canceled -= instance.OnArrows;
-            @WASD.started -= instance.OnWASD;
-            @WASD.performed -= instance.OnWASD;
-            @WASD.canceled -= instance.OnWASD;
-            @LeftStickGamepad.started -= instance.OnLeftStickGamepad;
-            @LeftStickGamepad.performed -= instance.OnLeftStickGamepad;
-            @LeftStickGamepad.canceled -= instance.OnLeftStickGamepad;
-            @LookAround.started -= instance.OnLookAround;
-            @LookAround.performed -= instance.OnLookAround;
-            @LookAround.canceled -= instance.OnLookAround;
+            @Movement.started -= instance.OnMovement;
+            @Movement.performed -= instance.OnMovement;
+            @Movement.canceled -= instance.OnMovement;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
         }
 
-        public void RemoveCallbacks(INavigatingActions instance)
+        public void RemoveCallbacks(IPlayerActions instance)
         {
-            if (m_Wrapper.m_NavigatingActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_PlayerActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(INavigatingActions instance)
+        public void SetCallbacks(IPlayerActions instance)
         {
-            foreach (var item in m_Wrapper.m_NavigatingActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_PlayerActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_NavigatingActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_PlayerActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public NavigatingActions @navigating => new NavigatingActions(this);
-    public interface INavigatingActions
+    public PlayerActions @Player => new PlayerActions(this);
+    private int m_KeyboardSchemeIndex = -1;
+    public InputControlScheme KeyboardScheme
     {
-        void OnArrows(InputAction.CallbackContext context);
-        void OnWASD(InputAction.CallbackContext context);
-        void OnLeftStickGamepad(InputAction.CallbackContext context);
-        void OnLookAround(InputAction.CallbackContext context);
+        get
+        {
+            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+            return asset.controlSchemes[m_KeyboardSchemeIndex];
+        }
+    }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
+    public interface IPlayerActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
     }
 }
