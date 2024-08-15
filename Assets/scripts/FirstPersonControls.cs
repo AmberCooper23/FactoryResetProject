@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.ShaderGraph;
+using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
 
 public class FirstPersonControls : MonoBehaviour
@@ -22,7 +24,9 @@ public class FirstPersonControls : MonoBehaviour
     private float verticalLookRotation = 0f; // Keeps track of vertical camera rotation for clamping
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
-
+    public float sprintSpeed = 5f;
+    
+   
     [Header("SHOOTING SETTINGS")]
     [Space(5)]
     public GameObject projectilePrefab; // Projectile prefab for shooting
@@ -78,6 +82,9 @@ public class FirstPersonControls : MonoBehaviour
 
         playerInput.Player.Crouch.performed += ctx => ToggleCrouch(); // Call the Crouch method when crouch input is performed
 
+        playerInput.Player.Sprint.performed += ctx => Sprinting();
+
+
 
     }
 
@@ -110,6 +117,7 @@ public class FirstPersonControls : MonoBehaviour
 
         // Move the character controller based on the movement vector and speed
         characterController.Move(move * moveSpeed * Time.deltaTime);
+
     }
 
     public void LookAround()
@@ -226,6 +234,11 @@ public class FirstPersonControls : MonoBehaviour
             characterController.height = crouchHeight;
             isCrouching = true; 
         }
+    }
+
+    public void Sprinting()
+    {
+        moveSpeed = sprintSpeed * 4;
     }
 
        
