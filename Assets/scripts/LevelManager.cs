@@ -20,8 +20,9 @@ public class LevelManager : MonoBehaviour
     {
         if (playerObject != null)
         {
-            Debug.Log("Respawned");
+            Debug.Log("Respawn function called");
             playerObject.transform.position = currentCheckpoint.transform.position;
+            Debug.Log("lol");
         }
         else
         {
