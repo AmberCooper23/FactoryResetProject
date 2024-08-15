@@ -821,11 +821,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b530385fbbc3c504c84432bdcba71c80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 4
   lookSpeed: 1
   gravity: -9.81
   jumpHeight: 1
   playerCamera: {fileID: 330585546}
+  sprintSpeed: 10
   projectilePrefab: {fileID: 2437321081151422315, guid: de2d31f7418503143a6cca8a7641a29b,
     type: 3}
   firePoint: {fileID: 778516358}
