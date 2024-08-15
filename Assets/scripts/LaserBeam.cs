@@ -31,7 +31,7 @@ public class LaserBeam : MonoBehaviour
             if (hit.collider)
             {
                 lr.SetPosition(1, hit.point);
-                Debug.Log("Get collided motherfucker");
+                Debug.Log("Get collided motherfucker"); // laser is being stopped by the wall
             }
             else
             {
