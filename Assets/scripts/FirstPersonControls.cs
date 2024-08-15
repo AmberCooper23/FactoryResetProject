@@ -83,7 +83,7 @@ public class FirstPersonControls : MonoBehaviour
         playerInput.Player.Crouch.performed += ctx => ToggleCrouch(); // Call the Crouch method when crouch input is performed
 
         playerInput.Player.Sprint.performed += ctx => Sprinting();
-
+        playerInput.Player.Sprint.canceled += ctx => Walking();
 
 
     }
@@ -238,9 +238,15 @@ public class FirstPersonControls : MonoBehaviour
 
     public void Sprinting()
     {
-        moveSpeed = sprintSpeed * 4;
+        moveSpeed = sprintSpeed * 2;
     }
 
-       
-    
+    public void Walking()
+    {
+        moveSpeed = 4;
+    }
+            
+ 
+
+
 }
