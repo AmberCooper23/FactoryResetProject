@@ -20,7 +20,7 @@ public class PlatformSpawner : MonoBehaviour
     
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject == Bullet)
+        if (other.gameObject.CompareTag("Bullet"))
         {
             PlatformGameObject.SetActive(true);
             Debug.Log("Platform appears");
