@@ -8,11 +8,13 @@ public class LaserBeamsForward : MonoBehaviour
 
 
         public Transform startPoint;
+        public LevelManager levelManager;
 
 
         private void Start()
         {
             lr = GetComponent<LineRenderer>();
+            levelManager = FindObjectOfType<LevelManager>();
         }
 
 
@@ -30,7 +32,8 @@ public class LaserBeamsForward : MonoBehaviour
                 }
                 if (hit.transform.tag == "Player")
                 {
-                    Destroy(hit.transform.gameObject);
+               //  Destroy(hit.transform.gameObject);
+                levelManager.RespawnPlayer();
                 }
             }
             else lr.SetPosition(1, transform.right * 5000);
