@@ -9,11 +9,14 @@ public class LaserBeam : MonoBehaviour
 
     
     public Transform startPoint;
+    public LevelManager levelManager;
 
 
     private void Start()
     {
         lr = GetComponent<LineRenderer>();
+        levelManager = FindObjectOfType<LevelManager>();
+
     }
 
 
@@ -28,11 +31,19 @@ public class LaserBeam : MonoBehaviour
             if (hit.collider)
             {
                 lr.SetPosition(1, hit.point);
+                Debug.Log("Get collided motherfucker");
+            }
+            else
+            {
+                Debug.Log("you hallucinated the collision");
             }
             if (hit.transform.tag == "Player")
             {
-                Destroy(hit.transform.gameObject);
+              // Destroy(hit.transform.gameObject);
+                levelManager.RespawnPlayer();
+                Debug.Log("respawn like a bitch");
             }
+           
         }
         else lr.SetPosition(1, transform.right * 5000);
     }
