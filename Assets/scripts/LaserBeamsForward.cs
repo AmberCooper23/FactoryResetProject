@@ -29,13 +29,20 @@ public class LaserBeamsForward : MonoBehaviour
                 if (hit.collider)
                 {
                     lr.SetPosition(1, hit.point);
+                Debug.Log("Player collided");
                 }
+                else
+            {
+                Debug.Log("aint no collision chief");
+            }
                 if (hit.transform.tag == "Player")
                 {
                //  Destroy(hit.transform.gameObject);
                 levelManager.RespawnPlayer();
+                Debug.Log("respawning like a bitch lmfao");
                 }
-            }
+               
+        }
             else lr.SetPosition(1, transform.right * 5000);
         }
     }
