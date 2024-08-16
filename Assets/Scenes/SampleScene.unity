@@ -756,7 +756,7 @@ MonoBehaviour:
   maxFallingSpeed: 10
   acceleration: 0.1
   destroyDelay: 10
-  dropDelay: 3
+  dropDelay: 1
 --- !u!65 &147921440
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2036,7 +2036,7 @@ MonoBehaviour:
   maxFallingSpeed: 10
   acceleration: 0.1
   destroyDelay: 10
-  dropDelay: 3
+  dropDelay: 1
 --- !u!1 &445889095 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6014232382242948077, guid: 11a1eddfc7119c042a08aa7976ac532d,
@@ -3679,7 +3679,7 @@ MonoBehaviour:
   maxFallingSpeed: 10
   acceleration: 0.1
   destroyDelay: 10
-  dropDelay: 3
+  dropDelay: 1
 --- !u!1 &1161124346 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -9203324390398772745, guid: 11a1eddfc7119c042a08aa7976ac532d,
@@ -4161,10 +4161,45 @@ PrefabInstance:
       propertyPath: m_TagString
       value: LaserBeam
       objectReference: {fileID: 0}
+    - target: {fileID: 4516647793904684497, guid: 11a1eddfc7119c042a08aa7976ac532d,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: -0.939907
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516647793904684497, guid: 11a1eddfc7119c042a08aa7976ac532d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.8839
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891294558105794823, guid: 11a1eddfc7119c042a08aa7976ac532d,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: -1.5525293
+      objectReference: {fileID: 0}
+    - target: {fileID: 4891294558105794823, guid: 11a1eddfc7119c042a08aa7976ac532d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.1359
+      objectReference: {fileID: 0}
     - target: {fileID: 5081996793030712813, guid: 11a1eddfc7119c042a08aa7976ac532d,
         type: 3}
       propertyPath: m_TagString
       value: LaserBeam
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473709128594132986, guid: 11a1eddfc7119c042a08aa7976ac532d,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: -1.394513
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473709128594132986, guid: 11a1eddfc7119c042a08aa7976ac532d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5473709128594132986, guid: 11a1eddfc7119c042a08aa7976ac532d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -49.488
       objectReference: {fileID: 0}
     - target: {fileID: 6490625522564147758, guid: 11a1eddfc7119c042a08aa7976ac532d,
         type: 3}
@@ -5673,7 +5708,7 @@ MonoBehaviour:
   maxFallingSpeed: 10
   acceleration: 0.1
   destroyDelay: 10
-  dropDelay: 3
+  dropDelay: 1
 --- !u!65 &1677237487
 BoxCollider:
   m_ObjectHideFlags: 0
