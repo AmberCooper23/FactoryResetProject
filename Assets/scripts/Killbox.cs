@@ -23,7 +23,7 @@ public class Killbox : MonoBehaviour
         player = GetComponent<FirstPersonController>();
 
     }
-    void OnTriggerEnter (Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if ((other.CompareTag("Player"))) // Check if the collider has the specified tag
         {
