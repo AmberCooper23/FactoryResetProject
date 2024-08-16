@@ -7,16 +7,29 @@ public class Killbox : MonoBehaviour
     //[SerializeField] private Transform respawnPosition; // Position where the player should respawn
     //[SerializeField] private string playerTag = "Player"; // Tag used to identify the player
     public LevelManager levelManager;
-  //  public GameObject player;
+    //  public GameObject player;
+
+    public GameObject currentCheckpoint;
+
+    public GameObject playerObject;
+
+    private FirstPersonController player;
+
 
     // Called when another collider enters the trigger collider
-    void OnCollisionEnter  (Collision other)
+
+    private void Start()
     {
-        if (other.gameObject.CompareTag("Player")) // Check if the collider has the specified tag
+        player = GetComponent<FirstPersonController>();
+
+    }
+    void OnTriggerEnter (Collider other)
+    {
+        if ((other.CompareTag("Player"))) // Check if the collider has the specified tag
         {
             Debug.Log("collided with killbox");
             // Respawn the player to the respawn position
-           levelManager.RespawnPlayer(); // call the Respawn Player method from the Level Manager script
+            levelManager.RespawnPlayer();
         }
     }
 }
