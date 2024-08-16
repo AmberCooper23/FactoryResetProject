@@ -34,9 +34,16 @@ public class FallingPlatforms : MonoBehaviour
     {
         if (isFalling)
         {
-            
+
             fallingSpeed = Mathf.Min(fallingSpeed + acceleration * Time.deltaTime, maxFallingSpeed);
-            transform.position += Vector3.down * fallingSpeed * Time.deltaTime; 
+            transform.position += Vector3.down * fallingSpeed * Time.deltaTime;
         }
+
+
+
+        
+
     }
+
+ 
 }

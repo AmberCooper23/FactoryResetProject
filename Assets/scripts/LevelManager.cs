@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class LevelManager : MonoBehaviour
 {
@@ -15,7 +18,6 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         player = GetComponent<FirstPersonController>();
-
     }
 
     public void RespawnPlayer()
