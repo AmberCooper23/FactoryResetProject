@@ -809,6 +809,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentCheckpoint: {fileID: 406307227}
   playerObject: {fileID: 229603602}
+  characterController: {fileID: 229603603}
 --- !u!4 &189643939
 Transform:
   m_ObjectHideFlags: 0
@@ -3901,6 +3902,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 189643938}
+  currentCheckpoint: {fileID: 406307227}
+  playerObject: {fileID: 229603602}
 --- !u!33 &1230406972
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3939,7 +3942,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -6461,6 +6464,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelManager: {fileID: 0}
+  currentCheckpoint: {fileID: 0}
+  playerObject: {fileID: 0}
 --- !u!1 &2126803814 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5754060345647867467, guid: 11a1eddfc7119c042a08aa7976ac532d,
