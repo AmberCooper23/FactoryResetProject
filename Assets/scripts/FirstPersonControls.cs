@@ -1,10 +1,12 @@
+//using System.Collections;
+//using System.Collections.Generic;
+//using JetBrains.Annotations;
+//using 
+//using UnityEditor.ShaderGraph;
+//using UnityEditor.ShaderGraph.Drawing;
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
-using Unity.PlasticSCM.Editor.WebApi;
-using UnityEditor.Experimental.GraphView;
 using UnityEditor.ShaderGraph;
-using UnityEditor.ShaderGraph.Drawing;
 using UnityEngine;
 
 public class FirstPersonControls : MonoBehaviour
@@ -24,29 +26,34 @@ public class FirstPersonControls : MonoBehaviour
     private float verticalLookRotation = 0f; // Keeps track of vertical camera rotation for clamping
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
-    public float sprintSpeed = 5f;
-    
-   
+    public float sprintSpeed = 5f; 
+
     [Header("SHOOTING SETTINGS")]
     [Space(5)]
     public GameObject projectilePrefab; // Projectile prefab for shooting
     public Transform firePoint; // Point from which the projectile is fired
     public float projectileSpeed = 20f; // Speed at which the projectile is fired
-
+    public float pickUpRange = 3f; // Range within which objects can be picked up
+    private bool holdingGun = false;
 
     [Header("PICKING UP SETTINGS")]
     [Space(5)]
     public Transform holdPosition; // Position where the picked-up object will be held
     private GameObject heldObject; // Reference to the currently held object
-    public float pickUpRange = 3f; // Range within which objects can be picked up
-    private bool holdingGun = false;
 
+    // Crouch settings
     [Header("CROUCH SETTINGS")]
     [Space(5)]
-    public float crouchHeight = 1;
-    public float standingHeight = 2;
-    public float crouchSpeed = 1.5f;
-    private bool isCrouching = false;
+    public float crouchHeight = 1f; // Height of the player when crouching
+    public float standingHeight = 2f; // Height of the player when standing
+    public float crouchSpeed = 2.5f; // Speed at which the player moves when crouching
+    private bool isCrouching = false; // Whether the player is currently crouching
+
+    [Header("INTERACT SETTINGS")]
+    [Space(5)]
+    public Material switchMaterial; // Material to apply when switch is activated
+    public GameObject[] objectsToChangeColor; // Array of objects to change color
+
 
 
     private void Awake()
@@ -80,12 +87,15 @@ public class FirstPersonControls : MonoBehaviour
         // Subscribe to the pick-up input event
         playerInput.Player.PickUp.performed += ctx => PickUpObject(); // Call the PickUpObject method when pick-up input is performed
 
-        playerInput.Player.Crouch.performed += ctx => ToggleCrouch(); // Call the Crouch method when crouch input is performed
+        // Subscribe to the crouch input event
+        playerInput.Player.Crouch.performed += ctx => ToggleCrouch(); // Call the ToggleCrouch method when crouch input is performed
+
+        // Subscribe to the interact input event
+        playerInput.Player.Interact.performed += ctx => Interact(); // Interact with switch
 
         playerInput.Player.Sprint.performed += ctx => Sprinting();
-        playerInput.Player.Sprint.canceled += ctx => Walking();
 
-
+        playerInput.Player.Sprint.canceled += ctx => Walking(); 
     }
 
     private void Update()
@@ -104,7 +114,7 @@ public class FirstPersonControls : MonoBehaviour
         // Transform direction from local to world space
         move = transform.TransformDirection(move);
 
-        //Adjust speed if crouching
+        // Adjust speed if crouching
         float currentSpeed;
         if (isCrouching)
         {
@@ -115,9 +125,9 @@ public class FirstPersonControls : MonoBehaviour
             currentSpeed = moveSpeed;
         }
 
-        // Move the character controller based on the movement vector and speed
-        characterController.Move(move * moveSpeed * Time.deltaTime);
 
+        // Move the character controller based on the movement vector and speed
+        characterController.Move(move * currentSpeed * Time.deltaTime);
     }
 
     public void LookAround()
@@ -198,7 +208,7 @@ public class FirstPersonControls : MonoBehaviour
             {
                 // Pick up the object
                 heldObject = hit.collider.gameObject;
-                heldObject.GetComponent<Rigidbody>().isKinematic = false; // Disable physics
+                heldObject.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
 
                 // Attach the object to the hold position
                 heldObject.transform.position = holdPosition.position;
@@ -218,35 +228,79 @@ public class FirstPersonControls : MonoBehaviour
 
                 holdingGun = true;
             }
-
         }
-
     }
+
     public void ToggleCrouch()
     {
         if (isCrouching)
         {
-            characterController.height = standingHeight; 
+            // Stand up
+            characterController.height = standingHeight;
             isCrouching = false;
         }
         else
         {
+            // Crouch down
             characterController.height = crouchHeight;
-            isCrouching = true; 
+            isCrouching = true;
         }
     }
 
     public void Sprinting()
     {
-        moveSpeed = sprintSpeed * 2;
+        moveSpeed = sprintSpeed * 2; 
     }
 
     public void Walking()
     {
-        moveSpeed = 4;
+        moveSpeed = 4; 
     }
-            
- 
+
+    public void Interact()
+    {
+        // Perform a raycast to detect the lightswitch
+        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, pickUpRange))
+        {
+            if (hit.collider.CompareTag("Switch")) // Assuming the switch has this tag
+            {
+                // Change the material color of the objects in the array
+                foreach (GameObject obj in objectsToChangeColor)
+                {
+                    Renderer renderer = obj.GetComponent<Renderer>();
+                    if (renderer != null)
+                    {
+                        renderer.material.color = switchMaterial.color; // Set the color to match the switch material color
+                    }
+                }
+            }
+
+            else if (hit.collider.CompareTag("Door")) // Check if the object is a door
+            {
+                // Start moving the door upwards
+                StartCoroutine(RaiseDoor(hit.collider.gameObject));
+            }
+        }
+    }
+
+    private IEnumerator RaiseDoor(GameObject door)
+    {
+        float raiseAmount = 5f; // The total distance the door will be raised
+        float raiseSpeed = 2f; // The speed at which the door will be raised
+        Vector3 startPosition = door.transform.position; // Store the initial position of the door
+        Vector3 endPosition = startPosition + Vector3.up * raiseAmount; // Calculate the final position of the door after raising
+
+        // Continue raising the door until it reaches the target height
+        while (door.transform.position.y < endPosition.y)
+        {
+            // Move the door towards the target position at the specified speed
+            door.transform.position = Vector3.MoveTowards(door.transform.position, endPosition, raiseSpeed * Time.deltaTime);
+            yield return null; // Wait until the next frame before continuing the loop
+        }
+    }
 
 
 }

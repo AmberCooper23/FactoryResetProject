@@ -9,6 +9,8 @@ TagManager:
   - PickUp
   - LaserBeam
   - KillBox
+  - Switch
+  - Door
   layers:
   - Default
   - TransparentFX
