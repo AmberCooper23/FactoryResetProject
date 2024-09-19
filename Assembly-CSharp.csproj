@@ -76,6 +76,7 @@
     <Compile Include="Assets\scripts\Killbox.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\action maps\sdfsdnfok.cs" />
+    <Compile Include="Assets\DoorScript.cs" />
     <Compile Include="Assets\scripts\FirstPersonControls.cs" />
     <Compile Include="Assets\scripts\RobotOpeningEyes.cs" />
     <Compile Include="Assets\scripts\LaserBeam.cs" />
