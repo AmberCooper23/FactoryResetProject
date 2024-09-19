@@ -281,26 +281,26 @@ public class FirstPersonControls : MonoBehaviour
             else if (hit.collider.CompareTag("Door")) // Check if the object is a door
             {
                 // Start moving the door upwards
-                StartCoroutine(RaiseDoor(hit.collider.gameObject));
+                StartCoroutine(SlideDoor(hit.collider.gameObject));
             }
         }
     }
 
-    private IEnumerator RaiseDoor(GameObject door)
+    private IEnumerator SlideDoor(GameObject door)
     {
-        float raiseAmount = 5f; // The total distance the door will be raised
-        float raiseSpeed = 2f; // The speed at which the door will be raised
+        float slideAmount = 5f; // The total distance the door will be raised
+        float slideSpeed = 2f; // The speed at which the door will be raised
         Vector3 startPosition = door.transform.position; // Store the initial position of the door
-        Vector3 endPosition = startPosition + Vector3.up * raiseAmount; // Calculate the final position of the door after raising
+        Vector3 endPosition = startPosition + Vector3.up * slideAmount; // Calculate the final position of the door after raising
 
         // Continue raising the door until it reaches the target height
         while (door.transform.position.y < endPosition.y)
         {
             // Move the door towards the target position at the specified speed
-            door.transform.position = Vector3.MoveTowards(door.transform.position, endPosition, raiseSpeed * Time.deltaTime);
+            door.transform.position = Vector3.MoveTowards(door.transform.position, endPosition, slideSpeed * Time.deltaTime);
             yield return null; // Wait until the next frame before continuing the loop
         }
     }
 
-
+   
 }
