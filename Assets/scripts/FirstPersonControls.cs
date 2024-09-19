@@ -296,7 +296,7 @@ public class FirstPersonControls : MonoBehaviour
         float slideAmount = 5f; // The total distance the door will be raised
         float slideSpeed = 2f; // The speed at which the door will be raised
         Vector3 startPosition = door.transform.position; // Store the initial position of the door
-        Vector3 endPosition = startPosition + Vector3.up * slideAmount; // Calculate the final position of the door after raising
+        Vector3 endPosition = startPosition + (Vector3.right * slideAmount); // Calculate the final position of the door after raising
 
         // Continue raising the door until it reaches the target height
         while (door.transform.position.y < endPosition.y)
