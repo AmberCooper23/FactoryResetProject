@@ -22,7 +22,7 @@ public class FirstPersonControls : MonoBehaviour
     public Transform playerCamera; // Reference to the player's camera
                                    // Private variables to store input values and the character controller
     private Vector2 moveInput; // Stores the movement input from the player
-    private Vector2 lookInput; // Stores the look input from the player
+    public Vector2 lookInput; // Stores the look input from the player
     private float verticalLookRotation = 0f; // Keeps track of vertical camera rotation for clamping
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
