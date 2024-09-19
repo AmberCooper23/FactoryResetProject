@@ -8,6 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FirstPersonControls : MonoBehaviour
 {
@@ -54,7 +55,9 @@ public class FirstPersonControls : MonoBehaviour
     public Material switchMaterial; // Material to apply when switch is activated
     public GameObject[] objectsToChangeColor; // Array of objects to change color
 
-
+    [Header("COMPUTER INTERACTIONS")]
+    [Space(5)]
+    public string sceneToLoad;
 
     private void Awake()
     {
@@ -96,6 +99,8 @@ public class FirstPersonControls : MonoBehaviour
         playerInput.Player.Sprint.performed += ctx => Sprinting();
 
         playerInput.Player.Sprint.canceled += ctx => Walking(); 
+
+        playerInput.Player.ComputerInteract.performed += ctx => ComputerInteract();
     }
 
     private void Update()
@@ -302,5 +307,16 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
+    private void ComputerInteract()
+    {
+        if (!string.IsNullOrEmpty(sceneToLoad))
+        {
+            SceneManager.LoadScene(sceneToLoad);  // Load the specified scene
+        }
+        else
+        {
+            Debug.LogWarning("Scene name is not set.");
+        }
+    }
    
 }
