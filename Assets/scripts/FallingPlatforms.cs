@@ -22,6 +22,7 @@ public class FallingPlatforms : MonoBehaviour
         }
 
         Destroy(gameObject, destroyDelay);
+        Debug.Log("We're fallin' baby!");
     }
 
     private IEnumerator DropPlatformAfterDelay(float delay)

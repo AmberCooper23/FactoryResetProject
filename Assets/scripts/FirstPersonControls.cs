@@ -8,10 +8,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class FirstPersonControls : MonoBehaviour
 {
+    public Transform Hinge;
+    private bool Open;
 
     [Header("MOVEMENT SETTINGS")]
     [Space(5)]
@@ -108,6 +111,18 @@ public class FirstPersonControls : MonoBehaviour
         Move();
         LookAround();
         ApplyGravity();
+
+        Debug.Log(transform.position);
+
+        if (Open && Hinge.rotation.y < 0.9f)
+        {
+            Hinge.Rotate(0, 140 * Time.deltaTime, 0);
+        }
+        else if (Hinge.rotation.y > 0.9f)
+        {
+            Open = false;
+        }
+        Debug.Log(Hinge.rotation.y);
     }
 
     public void Move()

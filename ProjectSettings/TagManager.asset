@@ -13,6 +13,7 @@ TagManager:
   - Door
   - Door2
   - Computer Trigger
+  - Step
   layers:
   - Default
   - TransparentFX
