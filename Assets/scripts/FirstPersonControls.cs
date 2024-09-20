@@ -58,7 +58,7 @@ public class FirstPersonControls : MonoBehaviour
     [Header("COMPUTER INTERACTIONS")]
     [Space(5)]
     public string sceneToLoad;
-
+    public bool nearComputer = false;
     private void Awake()
     {
         // Get and store the CharacterController component attached to this GameObject
@@ -100,7 +100,6 @@ public class FirstPersonControls : MonoBehaviour
 
         playerInput.Player.Sprint.canceled += ctx => Walking(); 
 
-        playerInput.Player.ComputerInteract.performed += ctx => ComputerInteract();
     }
 
     private void Update()
@@ -307,16 +306,25 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
-    private void ComputerInteract()
+    private void OnTriggerEnter(Collider other)
     {
-        if (!string.IsNullOrEmpty(sceneToLoad))
+        if (other.CompareTag("ComputerTrigger"))
         {
-            SceneManager.LoadScene(sceneToLoad);  // Load the specified scene
-        }
-        else
-        {
-            Debug.LogWarning("Scene name is not set.");
+            Debug.Log("Player near computer");
+            nearComputer = true;
         }
     }
-   
+
+    //private void ComputerInteract()
+    //{
+    //    if (!string.IsNullOrEmpty(sceneToLoad))
+    //    {
+    //        SceneManager.LoadScene(sceneToLoad);  // Load the specified scene
+    //    }
+    //    else
+    //    {
+    //        Debug.LogWarning("Scene name is not set.");
+    //    }
+    //}
+
 }

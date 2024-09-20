@@ -76,15 +76,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "ComputerInteract",
-                    "type": "Button",
-                    "id": "77901be9-79ac-4c1c-b6d5-05e3e356aaa3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -406,26 +397,107 @@
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Computer",
+            "id": "a802149b-6afc-458c-a4a8-25caabc77412",
+            "actions": [
+                {
+                    "name": "DisplayControls",
+                    "type": "Button",
+                    "id": "0666dac3-4d40-48a7-942e-20341dff2a28",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
-                    "name": "",
-                    "id": "7ba7cc23-2999-48bc-ac19-eff7a7cb83f4",
-                    "path": "<Keyboard>/c",
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "09088962-d5d3-42c8-8156-cf65c9af24c5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "WASD",
+                    "id": "37f788c4-4343-404b-9ff2-73f2fa381d9f",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ComputerInteract",
+                    "action": "DisplayControls",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "f92e6fd3-05f5-4686-a315-4210bfebea51",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DisplayControls",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "3582793f-64b5-44f3-95f8-faa01505de27",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DisplayControls",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "3f3e6eb7-f527-49a2-a421-d9441181eb4b",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DisplayControls",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "d1bef307-eae9-4056-9ffe-d40ae5befdfd",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DisplayControls",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "7e42d6df-1c1c-42be-b42e-51224019f444",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "4c2913a3-3246-4e95-9726-5a2236aee77f",
-                    "path": "<DualShockGamepad>/leftStickPress",
+                    "id": "5b7c2f7a-2244-4b88-9e26-d7554498bdfe",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "ComputerInteract",
+                    "groups": "Gamepad",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

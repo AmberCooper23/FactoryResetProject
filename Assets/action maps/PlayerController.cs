@@ -98,15 +98,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""ComputerInteract"",
-                    ""type"": ""Button"",
-                    ""id"": ""77901be9-79ac-4c1c-b6d5-05e3e356aaa3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -428,26 +419,107 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Computer"",
+            ""id"": ""a802149b-6afc-458c-a4a8-25caabc77412"",
+            ""actions"": [
+                {
+                    ""name"": ""DisplayControls"",
+                    ""type"": ""Button"",
+                    ""id"": ""0666dac3-4d40-48a7-942e-20341dff2a28"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""7ba7cc23-2999-48bc-ac19-eff7a7cb83f4"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""09088962-d5d3-42c8-8156-cf65c9af24c5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""37f788c4-4343-404b-9ff2-73f2fa381d9f"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ComputerInteract"",
+                    ""action"": ""DisplayControls"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""f92e6fd3-05f5-4686-a315-4210bfebea51"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DisplayControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""3582793f-64b5-44f3-95f8-faa01505de27"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DisplayControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""3f3e6eb7-f527-49a2-a421-d9441181eb4b"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DisplayControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""d1bef307-eae9-4056-9ffe-d40ae5befdfd"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DisplayControls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e42d6df-1c1c-42be-b42e-51224019f444"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4c2913a3-3246-4e95-9726-5a2236aee77f"",
-                    ""path"": ""<DualShockGamepad>/leftStickPress"",
+                    ""id"": ""5b7c2f7a-2244-4b88-9e26-d7554498bdfe"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ComputerInteract"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -489,7 +561,10 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-        m_Player_ComputerInteract = m_Player.FindAction("ComputerInteract", throwIfNotFound: true);
+        // Computer
+        m_Computer = asset.FindActionMap("Computer", throwIfNotFound: true);
+        m_Computer_DisplayControls = m_Computer.FindAction("DisplayControls", throwIfNotFound: true);
+        m_Computer_Interact = m_Computer.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -559,7 +634,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Interact;
-    private readonly InputAction m_Player_ComputerInteract;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
@@ -572,7 +646,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
-        public InputAction @ComputerInteract => m_Wrapper.m_Player_ComputerInteract;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -606,9 +679,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
-            @ComputerInteract.started += instance.OnComputerInteract;
-            @ComputerInteract.performed += instance.OnComputerInteract;
-            @ComputerInteract.canceled += instance.OnComputerInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -637,9 +707,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
-            @ComputerInteract.started -= instance.OnComputerInteract;
-            @ComputerInteract.performed -= instance.OnComputerInteract;
-            @ComputerInteract.canceled -= instance.OnComputerInteract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -657,6 +724,60 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Computer
+    private readonly InputActionMap m_Computer;
+    private List<IComputerActions> m_ComputerActionsCallbackInterfaces = new List<IComputerActions>();
+    private readonly InputAction m_Computer_DisplayControls;
+    private readonly InputAction m_Computer_Interact;
+    public struct ComputerActions
+    {
+        private @PlayerController m_Wrapper;
+        public ComputerActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
+        public InputAction @DisplayControls => m_Wrapper.m_Computer_DisplayControls;
+        public InputAction @Interact => m_Wrapper.m_Computer_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Computer; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ComputerActions set) { return set.Get(); }
+        public void AddCallbacks(IComputerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ComputerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ComputerActionsCallbackInterfaces.Add(instance);
+            @DisplayControls.started += instance.OnDisplayControls;
+            @DisplayControls.performed += instance.OnDisplayControls;
+            @DisplayControls.canceled += instance.OnDisplayControls;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+        }
+
+        private void UnregisterCallbacks(IComputerActions instance)
+        {
+            @DisplayControls.started -= instance.OnDisplayControls;
+            @DisplayControls.performed -= instance.OnDisplayControls;
+            @DisplayControls.canceled -= instance.OnDisplayControls;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+        }
+
+        public void RemoveCallbacks(IComputerActions instance)
+        {
+            if (m_Wrapper.m_ComputerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IComputerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ComputerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ComputerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ComputerActions @Computer => new ComputerActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -685,6 +806,10 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnComputerInteract(InputAction.CallbackContext context);
+    }
+    public interface IComputerActions
+    {
+        void OnDisplayControls(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
