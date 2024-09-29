@@ -5,8 +5,6 @@
 //using UnityEditor.ShaderGraph;
 //using UnityEditor.ShaderGraph.Drawing;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -123,6 +121,16 @@ public class FirstPersonControls : MonoBehaviour
             Open = false;
         }
         Debug.Log(Hinge.rotation.y);
+
+        
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.collider.gameObject.CompareTag("Step"))
+        {
+            Open = true;
+        }
     }
 
     public void Move()
