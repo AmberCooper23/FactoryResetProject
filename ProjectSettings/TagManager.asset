@@ -12,9 +12,9 @@ TagManager:
   - Switch
   - Door
   - Door2
-  - Computer Trigger
   - Step
   - ComputerTrigger
+  - trigger
   layers:
   - Default
   - TransparentFX

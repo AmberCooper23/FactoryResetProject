@@ -329,25 +329,7 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        var playerInput = new PlayerController();
-        if (other.CompareTag("ComputerTrigger"))
-        {
-            Debug.Log("Player near computer");
-            nearComputer = true;
-        }
-
-        if (nearComputer == true)
-        {
-            playerInput.Player.Disable();
-        }
-
-        else
-        {
-            playerInput.Player.Enable();
-        }
-    }
+  
 
     //private void ComputerInteract()
     //{
