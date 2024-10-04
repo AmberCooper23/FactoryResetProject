@@ -663,6 +663,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""e7136723-33b6-4677-a67e-a1fda84e47b6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -753,6 +762,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67d968c1-a104-47de-8469-7105bcd13590"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ffc02388-50c2-4645-84af-c5e178e429de"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -830,6 +861,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
         m_MainMenu_Navigation = m_MainMenu.FindAction("Navigation", throwIfNotFound: true);
         m_MainMenu_Select = m_MainMenu.FindAction("Select", throwIfNotFound: true);
+        m_MainMenu_Back = m_MainMenu.FindAction("Back", throwIfNotFound: true);
         // Start
         m_Start = asset.FindActionMap("Start", throwIfNotFound: true);
         m_Start_Newaction = m_Start.FindAction("New action", throwIfNotFound: true);
@@ -1068,12 +1100,14 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private List<IMainMenuActions> m_MainMenuActionsCallbackInterfaces = new List<IMainMenuActions>();
     private readonly InputAction m_MainMenu_Navigation;
     private readonly InputAction m_MainMenu_Select;
+    private readonly InputAction m_MainMenu_Back;
     public struct MainMenuActions
     {
         private @PlayerController m_Wrapper;
         public MainMenuActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigation => m_Wrapper.m_MainMenu_Navigation;
         public InputAction @Select => m_Wrapper.m_MainMenu_Select;
+        public InputAction @Back => m_Wrapper.m_MainMenu_Back;
         public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1089,6 +1123,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @Back.started += instance.OnBack;
+            @Back.performed += instance.OnBack;
+            @Back.canceled += instance.OnBack;
         }
 
         private void UnregisterCallbacks(IMainMenuActions instance)
@@ -1099,6 +1136,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @Back.started -= instance.OnBack;
+            @Back.performed -= instance.OnBack;
+            @Back.canceled -= instance.OnBack;
         }
 
         public void RemoveCallbacks(IMainMenuActions instance)
@@ -1202,6 +1242,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     {
         void OnNavigation(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
     public interface IStartActions
     {

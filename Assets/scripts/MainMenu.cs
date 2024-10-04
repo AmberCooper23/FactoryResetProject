@@ -10,16 +10,35 @@ public class MainMenu : MonoBehaviour
     private PlayerController playerInput;
     public Button[] mainMenuButtons;
     private int currentButtonIndex = 0;
-
+    private Vector3[] originalScales;
+    private const float movementThreshold = 0.8f;
+    public GameObject controlPage;
+    public GameObject mainMenuPage;
+  
     private void Awake()
     {
         playerInput = new PlayerController();
         playerInput.MainMenu.Enable();
+        playerInput.Player.Disable();
+
+        originalScales = new Vector3[mainMenuButtons.Length];
+        for (int i = 0; i < mainMenuButtons.Length; i++)
+        {
+            originalScales[i] = mainMenuButtons[i].transform.localScale;
+        }
     }
 
     public void Play()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void ControlsScreen()
+    {
+        Debug.Log("controls pressed");
+        controlPage.SetActive(true);
+        mainMenuPage.SetActive(false);
+
     }
 
     public void Update()
@@ -37,30 +56,42 @@ public class MainMenu : MonoBehaviour
             SelectButton();
         }
 
+        if (playerInput.MainMenu.Back.triggered)
+        {
+            BackButton();
+        }
     }
 
-    private void OnDisable()
+    public void BackButton()
     {
-        playerInput.MainMenu.Disable();
+        Debug.Log("Back pressed");
+        controlPage.SetActive(false);
+        mainMenuPage.SetActive(true);
     }
+
     public void NavigateMenu(Vector2 moveInput)
     {
-        if (moveInput.y > 0)
+        if (Mathf.Abs(moveInput.y) > movementThreshold)
         {
-            currentButtonIndex--;
-
-            if (currentButtonIndex < 0)
+            if (moveInput.y > 0)
             {
-                currentButtonIndex = mainMenuButtons.Length - 1;
+                currentButtonIndex--;
+
+                if (currentButtonIndex < 0)
+                {
+                    currentButtonIndex = mainMenuButtons.Length - 1;
+                }
+                Debug.Log("Moved up, current button index: " + currentButtonIndex);
             }
+
             else if (moveInput.y < 0)
             {
                 currentButtonIndex++;
 
                 if (currentButtonIndex >= mainMenuButtons.Length)
                     currentButtonIndex = 0;
-            }
 
+            }
             UpdateButtonSelection();
         }
     }
@@ -69,9 +100,16 @@ public class MainMenu : MonoBehaviour
     {
         for (int i = 0; i < mainMenuButtons.Length; i++)
         {
-            ColorBlock colors = mainMenuButtons[i].colors; // Get the button's colors
-            colors.normalColor = (i == currentButtonIndex) ? Color.red : Color.white; // Highlight if selected
-            mainMenuButtons[i].colors = colors;
+            if (i == currentButtonIndex)
+            {
+                // Highlight the selected button by scaling it up
+                mainMenuButtons[i].transform.localScale = originalScales[i] * 1.2f;
+            }
+            else
+            {
+                // Reset the scale for non-selected buttons
+                mainMenuButtons[i].transform.localScale = originalScales[i];
+            }
         }
     }
 

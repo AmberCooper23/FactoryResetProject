@@ -18,6 +18,7 @@ public class FirstPersonControls : MonoBehaviour
 
     private PlayerController playerInput;
 
+
     [Header("MOVEMENT SETTINGS")]
     [Space(5)]
     // Public variables to set movement and look speed, and the player camera
@@ -110,6 +111,8 @@ public class FirstPersonControls : MonoBehaviour
 
         playerInput.Player.MenuOpenClose.performed += ctx => Pause();
 
+        playerInput.MainMenu.Back.performed += ctx => BackButton();
+
     }
 
     private void OnDisable()
@@ -171,6 +174,10 @@ public class FirstPersonControls : MonoBehaviour
         characterController.Move(move * currentSpeed * Time.deltaTime);
     }
 
+    public void BackButton()
+    {
+
+    }
     public void SwitchActionMap()
     {
         playerInput.Player.Disable();
