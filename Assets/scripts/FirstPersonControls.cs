@@ -13,6 +13,10 @@ public class FirstPersonControls : MonoBehaviour
 {
     public Transform Hinge;
     private bool Open;
+    public GameObject pauseMenuUI;
+    public static bool GameIsPaused = false;
+
+    private PlayerController playerInput;
 
     [Header("MOVEMENT SETTINGS")]
     [Space(5)]
@@ -64,12 +68,13 @@ public class FirstPersonControls : MonoBehaviour
     {
         // Get and store the CharacterController component attached to this GameObject
         characterController = GetComponent<CharacterController>();
+        playerInput = new PlayerController();
     }
 
     private void OnEnable()
     {
         // Create a new instance of the input actions
-        var playerInput = new PlayerController();
+        //var playerInput = new PlayerController();
 
         // Enable the input actions
         playerInput.Player.Enable();
@@ -99,8 +104,17 @@ public class FirstPersonControls : MonoBehaviour
 
         playerInput.Player.Sprint.performed += ctx => Sprinting();
 
-        playerInput.Player.Sprint.canceled += ctx => Walking(); 
+        playerInput.Player.Sprint.canceled += ctx => Walking();
 
+        playerInput.Player.SwitchMap.performed += ctx => SwitchActionMap();
+
+        playerInput.Player.MenuOpenClose.performed += ctx => Pause();
+
+    }
+
+    private void OnDisable()
+    {
+        playerInput.Player.Disable();
     }
 
     private void Update()
@@ -157,6 +171,17 @@ public class FirstPersonControls : MonoBehaviour
         characterController.Move(move * currentSpeed * Time.deltaTime);
     }
 
+    public void SwitchActionMap()
+    {
+        playerInput.Player.Disable();
+        playerInput.Computer.Enable();
+    }
+    private void Pause()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+    }
     public void LookAround()
     {
         // Get horizontal and vertical look inputs and adjust based on sensitivity
