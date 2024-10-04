@@ -658,7 +658,7 @@ MonoBehaviour:
   m_text: FACTORY RESET
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -821,7 +821,7 @@ GameObject:
   - component: {fileID: 723818871}
   - component: {fileID: 723818870}
   m_Layer: 0
-  m_Name: Options
+  m_Name: Controls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1295,6 +1295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581e5c612db610c41abb13d94e076302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenuButtons: []
 --- !u!4 &1089185198
 Transform:
   m_ObjectHideFlags: 0
@@ -1636,7 +1637,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OPTIONS
+  m_text: CONTROLS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
