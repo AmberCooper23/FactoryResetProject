@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{5B7FC7C1-8CD1-7D1B-6217-1F0B78F8281B}</ProjectGuid>
+    <ProjectGuid>{4CEFDC27-812C-4D0F-E6FD-FDDAE05E9FC0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -85,8 +85,8 @@
     <Compile Include="Assets\scripts\FirstPersonControls.cs" />
     <Compile Include="Assets\scripts\Dzoouh!.cs" />
     <Compile Include="Assets\scripts\RobotOpeningEyes.cs" />
-    <Compile Include="Assets\scripts\LaserBeam.cs" />
     <Compile Include="Assets\scripts\LoopVideo.cs" />
+    <Compile Include="Assets\scripts\LaserBeam.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DepthBlit\DepthBlitEdgePass.cs" />
     <Compile Include="Assets\scripts\MenuManager.cs" />
     <Compile Include="Assets\scripts\Platform.cs" />
