@@ -20,7 +20,7 @@ public class InputManager : MonoBehaviour
         }
 
         _playerInput = GetComponent<PlayerInput>();
-        _menuOpenCloseAction = _playerInput.actions["MenuOpenClose"];
+        _menuOpenCloseAction = _playerInput.actions["OpenPauseMenu"];
     }
 
     private void Update()

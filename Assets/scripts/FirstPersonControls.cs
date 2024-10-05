@@ -109,7 +109,7 @@ public class FirstPersonControls : MonoBehaviour
 
         playerInput.Player.SwitchMap.performed += ctx => SwitchActionMap();
 
-        playerInput.Player.MenuOpenClose.performed += ctx => Pause();
+        playerInput.PauseMenu.OpenPauseMenu.performed += ctx => Pause();
 
         playerInput.MainMenu.Back.performed += ctx => BackButton();
 

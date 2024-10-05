@@ -3,52 +3,157 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GameIsPaused = false;
-    public GameObject pauseMenuUI;
+    private PlayerController playerInput;
+    public Button[] pauseMenuButtons;
+    private int currentButtonIndex = 0;
+    private Vector3[] originalScales;
+    private const float movementThreshold = 0.8f;
+    public GameObject controlPage;
+    public GameObject pauseMenuPage;
 
-    // Update is called once per frame
-    void Update()
+    private bool isPaused = false;
+
+    private void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        playerInput = new PlayerController();
+        playerInput.PauseMenu.OpenPauseMenu.performed += ctx => TogglePause();
+        playerInput.PauseMenu.Enable();
+        playerInput.Player.Disable();
+        playerInput.MainMenu.Disable();
+
+        originalScales = new Vector3[pauseMenuButtons.Length];
+        for (int i = 0; i < pauseMenuButtons.Length; i++)
         {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            originalScales[i] = pauseMenuButtons[i].transform.localScale;
         }
     }
 
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false; 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void ControlsScreen()
+    {
+        Debug.Log("controls pressed");
+        controlPage.SetActive(true);
+        pauseMenuPage.SetActive(false);
+
+    }
+
+    public void Update()
+    {
+        if (isPaused) return; 
+
+        Vector2 moveInput = playerInput.MainMenu.Navigation.ReadValue<Vector2>();
+
+        if (moveInput.y > 0 || moveInput.y < 0)
+        {
+            NavigateMenu(moveInput);
+
+        }
+
+        if (playerInput.MainMenu.Select.triggered)
+        {
+            SelectButton();
+        }
+
+        if (playerInput.MainMenu.Back.triggered)
+        {
+            BackButton();
+        }
+    }
+
+    public void BackButton()
+    {
+        Debug.Log("Back pressed");
+        controlPage.SetActive(false);
+        pauseMenuPage.SetActive(true);
+        Resume(); 
+    }
+
+    public void NavigateMenu(Vector2 moveInput)
+    {
+        if (Mathf.Abs(moveInput.y) > movementThreshold)
+        {
+            if (moveInput.y > 0)
+            {
+                currentButtonIndex--;
+
+                if (currentButtonIndex < 0)
+                {
+                    currentButtonIndex = pauseMenuButtons.Length - 1;
+                }
+                Debug.Log("Moved up, current button index: " + currentButtonIndex);
+            }
+
+            else if (moveInput.y < 0)
+            {
+                currentButtonIndex++;
+
+                if (currentButtonIndex >= pauseMenuButtons.Length)
+                    currentButtonIndex = 0;
+
+            }
+            UpdateButtonSelection();
+        }
+    }
+
+    private void UpdateButtonSelection()
+    {
+        for (int i = 0; i < pauseMenuButtons.Length; i++)
+        {   
+            if (i == currentButtonIndex)
+            {
+                // Highlight the selected button by scaling it up
+                pauseMenuButtons[i].transform.localScale = originalScales[i] * 1.2f;
+            }
+            else
+            {
+                // Reset the scale for non-selected buttons
+                pauseMenuButtons[i].transform.localScale = originalScales[i];
+            }
+        }
     }
 
     private void Pause()
     {
-       pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
+        isPaused = true;
+        pauseMenuPage.SetActive(true);
+        Time.timeScale = 0; 
+        playerInput.Player.Disable();
+        Cursor.lockState = CursorLockMode.Locked; 
     }
 
-    public void LoadMenu()
+    public void SelectButton()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
+        pauseMenuButtons[currentButtonIndex].onClick.Invoke();
     }
 
-
-    public void QuitGame()
+    public void Quit()
     {
-        Debug.Log("We are outtta here!");
         Application.Quit();
+        Debug.Log("Sayonara Son!");
+    }
+
+    public void AreYouSureScreen()
+    {
+
+    }
+
+    private void TogglePause()
+    {
+        if (isPaused)
+        {
+            Resume(); 
+        }
+        else
+        {
+            Pause(); 
+        }
     }
 }
