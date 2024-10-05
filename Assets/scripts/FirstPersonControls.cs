@@ -70,6 +70,8 @@ public class FirstPersonControls : MonoBehaviour
         // Get and store the CharacterController component attached to this GameObject
         characterController = GetComponent<CharacterController>();
         playerInput = new PlayerController();
+
+        pauseMenuUI.SetActive(false);
     }
 
     private void OnEnable()
@@ -112,6 +114,8 @@ public class FirstPersonControls : MonoBehaviour
         playerInput.PauseMenu.OpenPauseMenu.performed += ctx => Pause();
 
         playerInput.MainMenu.Back.performed += ctx => BackButton();
+
+        playerInput.Player.Pause.performed += ctx => PauseGame();
 
     }
 
@@ -174,6 +178,12 @@ public class FirstPersonControls : MonoBehaviour
         characterController.Move(move * currentSpeed * Time.deltaTime);
     }
 
+    public void PauseGame()
+    {
+        playerInput.Player.Disable();
+        playerInput.PauseMenu.Enable();
+        pauseMenuUI.SetActive(true);
+    }
     public void BackButton()
     {
 
