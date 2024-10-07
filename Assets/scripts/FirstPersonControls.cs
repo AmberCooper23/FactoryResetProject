@@ -121,10 +121,7 @@ public class FirstPersonControls : MonoBehaviour
 
     private void OnDisable()
     {
-        if (playerInput != null && playerInput.Player.enabled)
-        {
-            playerInput.Player.Disable();
-        }
+        playerInput.Player.Disable();
     }
 
 
