@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseScript : MonoBehaviour
@@ -27,9 +28,15 @@ public class PauseScript : MonoBehaviour
     }
     public void ResumeScreen()
     {
-        playerInput.Player.Enable();
-        playerInput.PauseMenu.Disable();
-        pausePage.SetActive(false);
+            Time.timeScale = 1f;
+            Debug.Log("Game Resumed, Time Scale: " + Time.timeScale);
+
+ 
+            playerInput.Player.Enable();
+            playerInput.PauseMenu.Disable();
+
+  
+            pausePage.SetActive(false);
     }
     public void ControlsScreen()
     {
