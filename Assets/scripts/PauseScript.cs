@@ -26,18 +26,7 @@ public class PauseScript : MonoBehaviour
             originalScales[i] = pauseButtons[i].transform.localScale;
         }
     }
-    public void ResumeScreen()
-    {
-            Time.timeScale = 1f;
-            Debug.Log("Game Resumed, Time Scale: " + Time.timeScale);
 
- 
-            playerInput.Player.Enable();
-            playerInput.PauseMenu.Disable();
-
-  
-            pausePage.SetActive(false);
-    }
     public void ControlsScreen()
     {
         Debug.Log("controls pressed");

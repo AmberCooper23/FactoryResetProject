@@ -15,6 +15,7 @@ TagManager:
   - Step
   - ComputerTrigger
   - trigger
+  - Clap
   layers:
   - Default
   - TransparentFX

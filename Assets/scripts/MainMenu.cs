@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     private const float movementThreshold = 0.8f;
     public GameObject controlPage;
     public GameObject mainMenuPage;
+
   
     private void Awake()
     {

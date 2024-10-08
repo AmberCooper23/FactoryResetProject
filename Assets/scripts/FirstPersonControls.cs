@@ -12,7 +12,9 @@ using UnityEngine.SceneManagement;
 public class FirstPersonControls : MonoBehaviour
 {
     public Transform Hinge;
+    public Transform Hinge2;
     private bool Open;
+    private bool OpenDoor2;
     public GameObject pauseMenuUI;
     public static bool GameIsPaused = false;
 
@@ -65,6 +67,8 @@ public class FirstPersonControls : MonoBehaviour
     [Space(5)]
     public string sceneToLoad;
     public bool nearComputer = false;
+
+    public GameObject pausePage;
     private void Awake()
     {
         // Get and store the CharacterController component attached to this GameObject
@@ -144,6 +148,16 @@ public class FirstPersonControls : MonoBehaviour
         }
         Debug.Log(Hinge.rotation.y);
 
+        if(OpenDoor2 && Hinge2.rotation.y < 0.9f)
+        {
+            Hinge2.Rotate(0, 140 * Time.deltaTime, 0);
+        }
+        else if (Hinge2.rotation.y > 0.9f)
+        {
+            OpenDoor2 = false;
+        }
+        Debug.Log(Hinge2.rotation.y);
+
         
     }
 
@@ -153,7 +167,13 @@ public class FirstPersonControls : MonoBehaviour
         {
             Open = true;
         }
+
+        if (hit.collider.gameObject.CompareTag("Clap"))
+        {
+            OpenDoor2 = true; 
+        }
     }
+
 
     public void Move()
     {
@@ -181,9 +201,16 @@ public class FirstPersonControls : MonoBehaviour
 
     public void PauseGame()
     {
-        playerInput.Player.Disable();
+       playerInput.Player.Disable();
         playerInput.PauseMenu.Enable();
         pauseMenuUI.SetActive(true);
+    }
+
+    public void ResumeScreen()
+    {
+        playerInput.MainMenu.Disable();
+       playerInput.Player.Enable();
+        pauseMenuUI.SetActive(false);
     }
     public void BackButton()
     {
@@ -197,7 +224,7 @@ public class FirstPersonControls : MonoBehaviour
     private void Pause()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         GameIsPaused = true;
     }
     public void LookAround()
