@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     private const float movementThreshold = 0.8f;
     public GameObject controlPage;
     public GameObject mainMenuPage;
+    public string sceneToLoad;
 
   
     private void Awake()
@@ -32,6 +33,7 @@ public class MainMenu : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadSceneAsync(sceneToLoad);
     }
 
     public void ControlsScreen()

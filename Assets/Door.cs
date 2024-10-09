@@ -21,13 +21,15 @@ public class Door : MonoBehaviour
     public void OpenDoor()
     {
         //open = true;
-        Hinge.Rotate(0, openAngle * Time.deltaTime, 0);
+        Debug.Log("Opening");
+        Hinge.Rotate(0, openAngle , 0);
     }
 
     public void CloseDoor()
     {
         //open = false;
-        Hinge.Rotate(0, -openAngle * Time.deltaTime, 0);
+        Debug.Log("closing");
+        Hinge.Rotate(0, -openAngle , 0);
     }
 
 
