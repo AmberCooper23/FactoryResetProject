@@ -125,6 +125,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Read"",
+                    ""type"": ""Button"",
+                    ""id"": ""00f5c361-52dd-4de1-a32e-8815f8c6d1f6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -510,6 +519,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0ab858e2-6dfb-49ab-b5d8-5fc47f744ef5"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Read"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ae77eb12-0cbf-4901-8215-3b616dbcb47a"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Read"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1061,6 +1092,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_MenuOpenClose = m_Player.FindAction("MenuOpenClose", throwIfNotFound: true);
         m_Player_SwitchMap = m_Player.FindAction("SwitchMap", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_Read = m_Player.FindAction("Read", throwIfNotFound: true);
         // Computer
         m_Computer = asset.FindActionMap("Computer", throwIfNotFound: true);
         m_Computer_DisplayControls = m_Computer.FindAction("DisplayControls", throwIfNotFound: true);
@@ -1151,6 +1183,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MenuOpenClose;
     private readonly InputAction m_Player_SwitchMap;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_Read;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
@@ -1166,6 +1199,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @MenuOpenClose => m_Wrapper.m_Player_MenuOpenClose;
         public InputAction @SwitchMap => m_Wrapper.m_Player_SwitchMap;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @Read => m_Wrapper.m_Player_Read;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1208,6 +1242,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Read.started += instance.OnRead;
+            @Read.performed += instance.OnRead;
+            @Read.canceled += instance.OnRead;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1245,6 +1282,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Read.started -= instance.OnRead;
+            @Read.performed -= instance.OnRead;
+            @Read.canceled -= instance.OnRead;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1525,6 +1565,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnMenuOpenClose(InputAction.CallbackContext context);
         void OnSwitchMap(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnRead(InputAction.CallbackContext context);
     }
     public interface IComputerActions
     {

@@ -17,6 +17,8 @@ public class FirstPersonControls : MonoBehaviour
     private bool OpenDoor2;
     public GameObject pauseMenuUI;
     public static bool GameIsPaused = false;
+    public GameObject letterUI;
+    bool toggle;
 
     private PlayerController playerInput;
 
@@ -121,6 +123,8 @@ public class FirstPersonControls : MonoBehaviour
 
         playerInput.Player.Pause.performed += ctx => PauseGame();
 
+        playerInput.Player.Read.performed += ctx => Read();
+
     }
 
     private void OnDisable()
@@ -136,7 +140,7 @@ public class FirstPersonControls : MonoBehaviour
         LookAround();
         ApplyGravity();
 
-        Debug.Log(transform.position);
+/*        Debug.Log(transform.position);
 
         if (Open && Hinge.rotation.y < 0.9f)
         {
@@ -156,7 +160,7 @@ public class FirstPersonControls : MonoBehaviour
         {
             OpenDoor2 = false;
         }
-        Debug.Log(Hinge2.rotation.y);
+        Debug.Log(Hinge2.rotation.y);*/
 
         
     }
@@ -399,7 +403,20 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
-  
+    private void Read()
+    {
+        toggle = !toggle;
+        if (toggle == false)
+        {
+            letterUI.SetActive(false);
+        }
+        if (toggle == true)
+        {
+            letterUI.SetActive(true);
+        }
+    }
+
+
 
     //private void ComputerInteract()
     //{
