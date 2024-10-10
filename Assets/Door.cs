@@ -5,7 +5,7 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     public Transform Hinge;
-    public Collider playerDetector;
+    //public Collider playerDetector;
     public float openAngle;
     private bool open;
 
