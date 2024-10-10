@@ -384,6 +384,11 @@ public class FirstPersonControls : MonoBehaviour
                 // Start moving the door upwards
                 StartCoroutine(SlideDoor(hit.collider.gameObject));
             }
+
+            else if (hit.collider.CompareTag("Door2"))
+            {
+
+            }
         }
     }
 
@@ -414,6 +419,11 @@ public class FirstPersonControls : MonoBehaviour
         {
             letterUI.SetActive(true);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
     }
 
 
