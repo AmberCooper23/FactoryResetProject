@@ -17,7 +17,9 @@ public class FirstPersonControls : MonoBehaviour
     private bool OpenDoor2;
     public GameObject pauseMenuUI;
     public static bool GameIsPaused = false;
-    public GameObject letterUI;
+
+    public GameObject playerPickUp;
+    
     bool toggle;
 
     private PlayerController playerInput;
@@ -123,7 +125,7 @@ public class FirstPersonControls : MonoBehaviour
 
         playerInput.Player.Pause.performed += ctx => PauseGame();
 
-        playerInput.Player.Read.performed += ctx => Read();
+       
 
     }
 
@@ -203,6 +205,7 @@ public class FirstPersonControls : MonoBehaviour
         characterController.Move(move * currentSpeed * Time.deltaTime);
     }
 
+    
     public void PauseGame()
     {
        playerInput.Player.Disable();
@@ -384,6 +387,11 @@ public class FirstPersonControls : MonoBehaviour
                 // Start moving the door upwards
                 StartCoroutine(SlideDoor(hit.collider.gameObject));
             }
+
+            else if (hit.collider.CompareTag("Door2"))
+            {
+
+            }
         }
     }
 
@@ -403,17 +411,11 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
-    private void Read()
+    
+
+    private void OnTriggerEnter(Collider other)
     {
-        toggle = !toggle;
-        if (toggle == false)
-        {
-            letterUI.SetActive(false);
-        }
-        if (toggle == true)
-        {
-            letterUI.SetActive(true);
-        }
+        
     }
 
 

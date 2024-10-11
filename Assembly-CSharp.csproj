@@ -69,10 +69,12 @@
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\SharedAssets\Scripts\AutoLoadPipelineAsset.cs" />
     <Compile Include="Assets\NewScript.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\BlitToRTHandle\BlitToRTHandleRendererFeature.cs" />
+    <Compile Include="Assets\scripts\SirenController.cs" />
     <Compile Include="Assets\scripts\PlatformSpawner.cs" />
     <Compile Include="Assets\scripts\PauseScript.cs" />
     <Compile Include="Assets\scripts\LetterScript.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\KeepFrame\KeepFrameFeature.cs" />
+    <Compile Include="Assets\PickUpText.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DistortTunnel\DistortTunnelPass_Distort.cs" />
     <Compile Include="Assets\scripts\LaserBeamsForward.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\BlitToRTHandle\BlitToRTHandlePass.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Assets\scripts\Killbox.cs" />
     <Compile Include="Assets\scripts\MainMenu.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\scripts\Interact2.cs" />
     <Compile Include="Assets\scripts\OpenDoors.cs" />
     <Compile Include="Assets\action maps\sdfsdnfok.cs" />
     <Compile Include="Assets\scripts\FirstPersonControls.cs" />
@@ -100,6 +103,7 @@
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DepthBlit\DepthBlitFeature.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\LensFlares\Scripts\ScreenSpacePlacement.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DistortTunnel\DistortTunnelRendererFeature.cs" />
+    <Compile Include="Assets\PickUpInteraction.cs" />
     <Compile Include="Assets\action maps\PlayerController.cs" />
     <Compile Include="Assets\scripts\TriggerPrompts.cs" />
   </ItemGroup>
