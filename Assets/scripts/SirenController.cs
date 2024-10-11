@@ -6,7 +6,6 @@ public class SirenController : MonoBehaviour
 {
     public GameObject emergencySiren; // Assign the siren GameObject in the Inspector
     public Collider sirenOnTrigger; // Assign the trigger to disable
-    public Collider cardDropZone;
 
    // public GameObject keyCard;
   //  public bool hasCard;
@@ -14,11 +13,11 @@ public class SirenController : MonoBehaviour
 
     public FirstPersonControls fpController;
 
+    public GameObject textTrigger;
     private void Start()
     {
         // Ensure the initial state is set correctly
         sirenOnTrigger.enabled = true;
-        cardDropZone.enabled = true;
         emergencySiren.SetActive(false);
       
     }
@@ -27,22 +26,17 @@ public class SirenController : MonoBehaviour
     {
         if ((other.CompareTag("Player"))) // Check if the collider has the specified tag
         {
-           
+            if (fpController.hasCard)
+            {
+                TurnOffSiren();
+                textTrigger.SetActive(false );
+            }
+            else
+            {
                 TurnOnSiren();
-          
+            }
         }
     }
-
-    private void OnCollisionEnter(Collision collider)
-    {
-        if (collider.gameObject.CompareTag("KeyCard"))
-        {
-            TurnOffSiren();
-            fpController.hasCard = false; // Set hasCard to false since the keycard is dropped
-            Debug.Log("Keycard dropped. Siren is OFF.");
-        }
-    }
-
 
     public void TurnOnSiren()
     {
@@ -55,5 +49,25 @@ public class SirenController : MonoBehaviour
         emergencySiren.SetActive(false);
     }
 
-   
+    //public void HoldingCard()
+    //{
+    //    if(fpController.hasCard == true && triggerToDisable != null)
+    //    {
+
+    //    }
+    //}
+
+    //public void TurnOffSiren(FirstPersonController fpController)
+    //{
+    //    // call a game object for keycard (referencing) , need bool for hasCard , if (bool hasCard == true && OnTriggerEnter triggerToDisable) 
+
+    //    if (hasCard = true && triggerToDisable != null)
+    //    {
+    //        // Disable the siren
+    //        emergencySiren.SetActive(false);
+    //        // Switch triggers
+    //       triggerToEnable.enabled = false;
+    //        triggerToDisable.enabled = true;
+    //    }
+    //}   
 }

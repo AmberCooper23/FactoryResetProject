@@ -24,7 +24,7 @@ public class LaserBeamsForward : MonoBehaviour
             lr.SetPosition(0, startPoint.position);
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, transform.up, out hit))
+            if (Physics.Raycast(transform.position, transform.forward, out hit))
             {
                 if (hit.collider)
                 {
