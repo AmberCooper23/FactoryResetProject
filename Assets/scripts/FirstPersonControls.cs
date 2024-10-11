@@ -24,6 +24,8 @@ public class FirstPersonControls : MonoBehaviour
 
     private PlayerController playerInput;
 
+    public bool hasCard = false;
+
 
     [Header("MOVEMENT SETTINGS")]
     [Space(5)]
@@ -80,6 +82,7 @@ public class FirstPersonControls : MonoBehaviour
         playerInput = new PlayerController();
 
         pauseMenuUI.SetActive(false);
+
     }
 
     private void OnEnable()
@@ -322,6 +325,7 @@ public class FirstPersonControls : MonoBehaviour
             else if (hit.collider.CompareTag("Gun"))
             {
                 // Pick up the object
+                Debug.Log("pick gun");
                 heldObject = hit.collider.gameObject;
                 heldObject.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
 
@@ -331,6 +335,20 @@ public class FirstPersonControls : MonoBehaviour
                 heldObject.transform.parent = holdPosition;
 
                 holdingGun = true;
+            }
+
+            else if (hit.collider.CompareTag("KeyCard"))
+            {
+                Debug.Log("got keycard");
+                heldObject = hit.collider.gameObject;
+                heldObject.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
+
+                // Attach the object to the hold position
+                heldObject.transform.position = holdPosition.position;
+                heldObject.transform.rotation = holdPosition.rotation;
+                heldObject.transform.parent = holdPosition;
+
+                hasCard = true;
             }
         }
     }

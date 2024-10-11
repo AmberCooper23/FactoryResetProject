@@ -14,6 +14,7 @@ public class LevelManager : MonoBehaviour
 
     public CharacterController characterController;
 
+   
     private void Start()
     {
         player = GetComponent<FirstPersonController>();
@@ -31,8 +32,9 @@ public class LevelManager : MonoBehaviour
             {
                 characterController.enabled = false;
                 Debug.Log("Character controller is disabled");
+                SceneManager.LoadScene("SampleScene");
             }
-            SceneManager.LoadScene("SampleScene");
+
         }
     }
 }

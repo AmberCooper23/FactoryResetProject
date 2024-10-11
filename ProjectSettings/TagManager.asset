@@ -16,6 +16,8 @@ TagManager:
   - ComputerTrigger
   - trigger
   - Clap
+  - enableSiren
+  - KeyCard
   layers:
   - Default
   - TransparentFX

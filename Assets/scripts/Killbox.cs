@@ -16,12 +16,15 @@ public class Killbox : MonoBehaviour
 
     private FirstPersonController player;
 
+    public GameObject redScreenUI;
 
+ 
     // Called when another collider enters the trigger collider
 
     private void Start()
     {
         player = GetComponent<FirstPersonController>();
+       
         Platform1.SetActive(true);
         Platform2.SetActive(true);
         Platform3.SetActive(true);
@@ -31,8 +34,17 @@ public class Killbox : MonoBehaviour
         RespawnPlatform3.SetActive(false);
         RespawnPlatform4.SetActive(false);
 
+        redScreenUI.SetActive(false);
     }
     void OnTriggerEnter(Collider other)
+    {
+        if ((other.CompareTag("Player"))) // Check if the collider has the specified tag
+        {
+            redScreenUI.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
     {
         if ((other.CompareTag("Player"))) // Check if the collider has the specified tag
         {

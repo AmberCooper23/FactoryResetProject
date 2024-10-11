@@ -5,27 +5,55 @@ using UnityEngine;
 public class SirenController : MonoBehaviour
 {
     public GameObject emergencySiren; // Assign the siren GameObject in the Inspector
-    public Collider triggerToDisable; // Assign the trigger to disable
-    public Collider triggerToEnable;  // Assign the trigger to enable
+    public Collider sirenOnTrigger; // Assign the trigger to disable
+    public Collider cardDropZone;
+
+   // public GameObject keyCard;
+  //  public bool hasCard;
+
+
+    public FirstPersonControls fpController;
 
     private void Start()
     {
         // Ensure the initial state is set correctly
-        EnableTriggers(true);
+        sirenOnTrigger.enabled = true;
+        cardDropZone.enabled = true;
+        emergencySiren.SetActive(false);
+      
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if ((other.CompareTag("Player"))) // Check if the collider has the specified tag
+        {
+           
+                TurnOnSiren();
+          
+        }
+    }
+
+    private void OnCollisionEnter(Collision collider)
+    {
+        if (collider.gameObject.CompareTag("KeyCard"))
+        {
+            TurnOffSiren();
+            fpController.hasCard = false; // Set hasCard to false since the keycard is dropped
+            Debug.Log("Keycard dropped. Siren is OFF.");
+        }
+    }
+
+
+    public void TurnOnSiren()
+    {
+        emergencySiren.SetActive(true);
+        Debug.Log("emergency siren ON");
     }
 
     public void TurnOffSiren()
     {
-        // Disable the siren
         emergencySiren.SetActive(false);
-
-        // Switch triggers
-        EnableTriggers(false);
     }
 
-    private void EnableTriggers(bool enable)
-    {
-        triggerToDisable.enabled = enable; // Enable or disable the first trigger
-        triggerToEnable.enabled = !enable; // Enable the second trigger if the first is disabled
-    }
+   
 }
