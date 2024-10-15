@@ -118,6 +118,8 @@ public class FirstPersonControls : MonoBehaviour
 
         playerInput.Player.Sprint.performed += ctx => Sprinting();
 
+        playerInput.Player.Sprint.canceled += ctx => SprintingStopped(); 
+
         playerInput.Player.Sprint.canceled += ctx => Walking();
 
         playerInput.Player.SwitchMap.performed += ctx => SwitchActionMap();
@@ -371,7 +373,12 @@ public class FirstPersonControls : MonoBehaviour
 
     public void Sprinting()
     {
-        moveSpeed = sprintSpeed * 2; 
+        moveSpeed = +5; 
+    }
+
+    public void SprintingStopped()
+    {
+        moveSpeed = -5; 
     }
 
     public void Walking()

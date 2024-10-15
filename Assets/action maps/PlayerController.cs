@@ -491,17 +491,6 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""256972c9-9a0a-4930-8d74-c379c0262bbe"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""SwitchMap"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""3eb7776a-5132-49ff-8b3f-229055d0abb4"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
