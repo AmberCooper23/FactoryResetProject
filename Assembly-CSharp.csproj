@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4CEFDC27-812C-4D0F-E6FD-FDDAE05E9FC0}</ProjectGuid>
+    <ProjectGuid>{5B7FC7C1-8CD1-7D1B-6217-1F0B78F8281B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -78,6 +78,7 @@
     <Compile Include="Assets\scripts\LetterScript.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\KeepFrame\KeepFrameFeature.cs" />
     <Compile Include="Assets\PickUpText.cs" />
+    <Compile Include="Assets\KeypadTrigger.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DistortTunnel\DistortTunnelPass_Distort.cs" />
     <Compile Include="Assets\scripts\LaserBeamsForward.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\BlitToRTHandle\BlitToRTHandlePass.cs" />

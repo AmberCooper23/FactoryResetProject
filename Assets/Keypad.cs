@@ -6,23 +6,30 @@ using TMPro;
 
 public class Keypad : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI Ans;
-    private Door Door;
-    private string Answer = "123456"; 
-    public void Number(int number)
+    public TextMeshProUGUI Answer;
+    [SerializeField] private Door door; //Referencing the Door Script
+    private string correctCode = "123456";
+
+    private void Start()
     {
-        Ans.text += number.ToString();
+        Answer.text = ""; //This is to reset the answer at the beginning
     }
 
-    public void Execute ()
+    public void Number (int number)
     {
-        if(Ans.text == Answer)
+        Answer.text += number.ToString();
+    }
+
+    public void Execute()
+    {
+        if(Answer.text == correctCode)
         {
-           Door.OpenDoor();
+            door.OpenDoor();
+            Answer.text = ""; //Resets the text
         }
         else
         {
-            Door.CloseDoor();
+            Answer.text = ""; 
         }
     }
 }
