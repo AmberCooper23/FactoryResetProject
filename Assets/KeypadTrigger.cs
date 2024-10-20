@@ -22,4 +22,6 @@ public class KeypadTrigger : MonoBehaviour
             keypad.Answer.text = "";
         }
     }
+
+    
 }

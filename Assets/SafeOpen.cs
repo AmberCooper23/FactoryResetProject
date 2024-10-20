@@ -1,31 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class SafeOpen : MonoBehaviour
+public class KeypadForSafe : MonoBehaviour
 {
-    public Transform Hinge;
-    public float openAngle;
-    private bool open;
+    public Text AnswerForSafe;
+    [SerializeField] private Animator Door;
+    private string correctCode = "2683111";
 
-    private void OnTriggerEnter(Collider other)
+    public void Number(int number)
     {
-        OpenSafe();
-    }
-    public void OnTriggerExit(Collider other)
-    {
-        CloseSafe();
+        AnswerForSafe.text += number.ToString();
     }
 
-    public void OpenSafe()
+    public void Execute()
     {
-        Debug.Log("Opening");
-        Hinge.Rotate(0, openAngle, 0);
+        if (AnswerForSafe.text == correctCode)
+        {
+            AnswerForSafe.text = "OPENED";
+            Door.SetBool("Open", true);
+            StartCoroutine("StopDoor");
+        }
+        else
+        {
+            AnswerForSafe.text = "";
+        }
     }
 
-    public void CloseSafe()
+    IEnumerator StopDoor()
     {
-        Debug.Log("closing");
-        Hinge.Rotate(0, -openAngle, 0);
+        yield return new WaitForSeconds(0.5f);
+        Door.SetBool("Open", false);
+        Door.enabled = false;
     }
 }
