@@ -29,7 +29,7 @@ public class LaserBeamsForward : MonoBehaviour
                 if (hit.collider)
                 {
                     lr.SetPosition(1, hit.point);
-                Debug.Log("wall collided"); //  // laser is being stopped by the wall
+                //Debug.Log("wall collided"); //  // laser is being stopped by the wall
             }
                 else
             {

@@ -59,8 +59,8 @@ public class FirstPersonControls : MonoBehaviour
     // Crouch settings
     [Header("CROUCH SETTINGS")]
     [Space(5)]
-    public float crouchHeight = 1f; // Height of the player when crouching
-    public float standingHeight = 2f; // Height of the player when standing
+    public float crouchHeight = 2f; // Height of the player when crouching
+    public float standingHeight = 3.41f; // Height of the player when standing
     public float crouchSpeed = 2.5f; // Speed at which the player moves when crouching
     private bool isCrouching = false; // Whether the player is currently crouching
 
@@ -73,6 +73,17 @@ public class FirstPersonControls : MonoBehaviour
     [Space(5)]
     public string sceneToLoad;
     public bool nearComputer = false;
+
+    [Header("Anim checks")]
+    [Space(5)]
+
+    public bool Iswalking;
+    public bool IsCrouching; 
+
+    //[Header("ANIMATION SETTINGS")]
+    //[Space(5)]
+    public Animator animator; //Reference to the Animator component 
+
 
     public GameObject pausePage;
     private void Awake()
@@ -88,7 +99,7 @@ public class FirstPersonControls : MonoBehaviour
     private void OnEnable()
     {
         // Create a new instance of the input actions
-        //var playerInput = new PlayerController();
+        var playerInput = new PlayerController();
 
         // Enable the input actions
         playerInput.Player.Enable();
@@ -174,7 +185,7 @@ public class FirstPersonControls : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.collider.gameObject.CompareTag("Step"))
+        /*if (hit.collider.gameObject.CompareTag("Step"))
         {
             Open = true;
         }
@@ -182,7 +193,7 @@ public class FirstPersonControls : MonoBehaviour
         if (hit.collider.gameObject.CompareTag("Clap"))
         {
             OpenDoor2 = true; 
-        }
+        }*/
     }
 
 
@@ -206,8 +217,27 @@ public class FirstPersonControls : MonoBehaviour
         }
 
 
+        if (moveInput.x == 0 && moveInput.y == 0)
+        {
+            currentSpeed = 0;
+            Iswalking = false;  
+            animator.SetBool("IsWalking",false);
+        }
+        else
+        {
+            currentSpeed = moveSpeed;
+            Iswalking = true;
+            animator.SetBool("IsWalking", true);
+        }
+
         // Move the character controller based on the movement vector and speed
         characterController.Move(move * currentSpeed * Time.deltaTime);
+        //animator.SetFloat("Speed", currentSpeed); //Update the speed parameter in the Animator 
+    }
+
+    public void WalkCheck() 
+    { 
+       
     }
 
     
@@ -362,12 +392,14 @@ public class FirstPersonControls : MonoBehaviour
             // Stand up
             characterController.height = standingHeight;
             isCrouching = false;
+            animator.SetBool("IsCrouching", false);
         }
         else
         {
             // Crouch down
             characterController.height = crouchHeight;
             isCrouching = true;
+            animator.SetBool("IsCrouching", true); 
         }
     }
 
@@ -422,7 +454,7 @@ public class FirstPersonControls : MonoBehaviour
 
     private IEnumerator SlideDoor(GameObject door)
     {
-        float slideAmount = 5f; // The total distance the door will be raised
+        float slideAmount = 8f; // The total distance the door will be raised
         float slideSpeed = 2f; // The speed at which the door will be raised
         Vector3 startPosition = door.transform.position; // Store the initial position of the door
         Vector3 endPosition = startPosition + (Vector3.up * slideAmount); // Calculate the final position of the door after raising
@@ -438,10 +470,10 @@ public class FirstPersonControls : MonoBehaviour
 
     
 
-    private void OnTriggerEnter(Collider other)
-    {
+    //private void OnTriggerEnter(Collider other)
+    //{
         
-    }
+    //}
 
 
 
