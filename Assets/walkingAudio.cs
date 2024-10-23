@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class walkingAudio : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //public AudioSource walkingClip;
+    //public PlayerController playerInput;
+    //public FirstPersonController fpControls;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //// Update is called once per frame
+    //void Update()
+    //{
+    //    if(fpControls.Move.IsWalking == true)
+    //    {
+    //        walkingClip.Play();
+    //    }
+    //}
 }
