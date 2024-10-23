@@ -142,7 +142,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""id"": ""6cf87ccd-ebee-4ed4-a86b-13a3c26ebee6"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""ScaleVector2(x=0.1,y=0.1)"",
                     ""groups"": """",
                     ""action"": ""Look"",
                     ""isComposite"": false,
@@ -1063,6 +1063,42 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""d2ea2829-d9b0-448b-808d-7ba492a0ca8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""84fcc26d-01ab-494d-bd0f-96201a13e29d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""8986a902-bc1b-4753-a47e-776f41af97ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""e1774357-11c7-494f-8bfe-a41c0d9fb07e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1131,6 +1167,50 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d848dba2-dca4-41a7-93ac-62e2bbffb4e2"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e9152fa-88e5-4eec-af6a-732b756bf5fd"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f0d6c979-600f-4ace-b4d6-02ce99dba29d"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab08f318-8982-47c1-947c-ce8bdfef79e3"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1196,6 +1276,10 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Keypad = asset.FindActionMap("Keypad", throwIfNotFound: true);
         m_Keypad_Navigate = m_Keypad.FindAction("Navigate", throwIfNotFound: true);
         m_Keypad_Select = m_Keypad.FindAction("Select", throwIfNotFound: true);
+        m_Keypad_Up = m_Keypad.FindAction("Up", throwIfNotFound: true);
+        m_Keypad_Down = m_Keypad.FindAction("Down", throwIfNotFound: true);
+        m_Keypad_Left = m_Keypad.FindAction("Left", throwIfNotFound: true);
+        m_Keypad_Right = m_Keypad.FindAction("Right", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1625,12 +1709,20 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private List<IKeypadActions> m_KeypadActionsCallbackInterfaces = new List<IKeypadActions>();
     private readonly InputAction m_Keypad_Navigate;
     private readonly InputAction m_Keypad_Select;
+    private readonly InputAction m_Keypad_Up;
+    private readonly InputAction m_Keypad_Down;
+    private readonly InputAction m_Keypad_Left;
+    private readonly InputAction m_Keypad_Right;
     public struct KeypadActions
     {
         private @PlayerController m_Wrapper;
         public KeypadActions(@PlayerController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Navigate => m_Wrapper.m_Keypad_Navigate;
         public InputAction @Select => m_Wrapper.m_Keypad_Select;
+        public InputAction @Up => m_Wrapper.m_Keypad_Up;
+        public InputAction @Down => m_Wrapper.m_Keypad_Down;
+        public InputAction @Left => m_Wrapper.m_Keypad_Left;
+        public InputAction @Right => m_Wrapper.m_Keypad_Right;
         public InputActionMap Get() { return m_Wrapper.m_Keypad; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1646,6 +1738,18 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Select.started += instance.OnSelect;
             @Select.performed += instance.OnSelect;
             @Select.canceled += instance.OnSelect;
+            @Up.started += instance.OnUp;
+            @Up.performed += instance.OnUp;
+            @Up.canceled += instance.OnUp;
+            @Down.started += instance.OnDown;
+            @Down.performed += instance.OnDown;
+            @Down.canceled += instance.OnDown;
+            @Left.started += instance.OnLeft;
+            @Left.performed += instance.OnLeft;
+            @Left.canceled += instance.OnLeft;
+            @Right.started += instance.OnRight;
+            @Right.performed += instance.OnRight;
+            @Right.canceled += instance.OnRight;
         }
 
         private void UnregisterCallbacks(IKeypadActions instance)
@@ -1656,6 +1760,18 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Select.started -= instance.OnSelect;
             @Select.performed -= instance.OnSelect;
             @Select.canceled -= instance.OnSelect;
+            @Up.started -= instance.OnUp;
+            @Up.performed -= instance.OnUp;
+            @Up.canceled -= instance.OnUp;
+            @Down.started -= instance.OnDown;
+            @Down.performed -= instance.OnDown;
+            @Down.canceled -= instance.OnDown;
+            @Left.started -= instance.OnLeft;
+            @Left.performed -= instance.OnLeft;
+            @Left.canceled -= instance.OnLeft;
+            @Right.started -= instance.OnRight;
+            @Right.performed -= instance.OnRight;
+            @Right.canceled -= instance.OnRight;
         }
 
         public void RemoveCallbacks(IKeypadActions instance)
@@ -1732,5 +1848,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     {
         void OnNavigate(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
     }
 }

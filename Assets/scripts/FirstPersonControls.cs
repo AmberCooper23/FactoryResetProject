@@ -74,6 +74,13 @@ public class FirstPersonControls : MonoBehaviour
     public string sceneToLoad;
     public bool nearComputer = false;
 
+    [Header("AUDIO IMPORTS")]
+    [Space(5)]
+    public AudioSource walkingClip;
+    public AudioSource pickUpClip;
+    public AudioSource dropClip;
+    //public AudioSource computerClip;
+
     [Header("Anim checks")]
     [Space(5)]
 
@@ -222,12 +229,15 @@ public class FirstPersonControls : MonoBehaviour
             currentSpeed = 0;
             Iswalking = false;  
             animator.SetBool("IsWalking",false);
+            walkingClip.Play();
+
         }
         else
         {
             currentSpeed = moveSpeed;
             Iswalking = true;
             animator.SetBool("IsWalking", true);
+           
         }
 
         // Move the character controller based on the movement vector and speed
@@ -330,6 +340,7 @@ public class FirstPersonControls : MonoBehaviour
             heldObject.GetComponent<Rigidbody>().isKinematic = false; // Enable physics
             heldObject.transform.parent = null;
             holdingGun = false;
+            
         }
 
         // Perform a raycast from the camera's position forward
@@ -342,6 +353,7 @@ public class FirstPersonControls : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
+            pickUpClip.Play();
             // Check if the hit object has the tag "PickUp"
             if (hit.collider.CompareTag("PickUp"))
             {

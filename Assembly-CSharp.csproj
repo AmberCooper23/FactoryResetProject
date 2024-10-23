@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4CEFDC27-812C-4D0F-E6FD-FDDAE05E9FC0}</ProjectGuid>
+    <ProjectGuid>{5B7FC7C1-8CD1-7D1B-6217-1F0B78F8281B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -68,53 +68,54 @@
     <Compile Include="Assets\scripts\EndSceneTrigger.cs" />
     <Compile Include="Assets\scripts\FlashingLight.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\SharedAssets\Scripts\AutoLoadPipelineAsset.cs" />
-    <Compile Include="Assets\SafeOpen.cs" />
-    <Compile Include="Assets\NewScript.cs" />
+    <Compile Include="Assets\scripts\Keypad.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\BlitToRTHandle\BlitToRTHandleRendererFeature.cs" />
-    <Compile Include="Assets\KeypadButtons.cs" />
     <Compile Include="Assets\scripts\SirenController.cs" />
     <Compile Include="Assets\scripts\PlatformSpawner.cs" />
-    <Compile Include="Assets\Locker.cs" />
     <Compile Include="Assets\scripts\PauseScript.cs" />
     <Compile Include="Assets\scripts\LetterScript.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\KeepFrame\KeepFrameFeature.cs" />
-    <Compile Include="Assets\PickUpText.cs" />
-    <Compile Include="Assets\KeypadTrigger.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DistortTunnel\DistortTunnelPass_Distort.cs" />
     <Compile Include="Assets\scripts\LaserBeamsForward.cs" />
     <Compile Include="Assets\scripts\OpenSafeTrigger.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\BlitToRTHandle\BlitToRTHandlePass.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DistortTunnel\DistortTunnelPass_CopyColor.cs" />
-    <Compile Include="Assets\Keypad.cs" />
     <Compile Include="Assets\scripts\Killbox.cs" />
     <Compile Include="Assets\scripts\MainMenu.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\scripts\Interact2.cs" />
     <Compile Include="Assets\scripts\OpenDoors.cs" />
     <Compile Include="Assets\action maps\sdfsdnfok.cs" />
+    <Compile Include="Assets\scripts\KeypadButtons.cs" />
     <Compile Include="Assets\scripts\FirstPersonControls.cs" />
     <Compile Include="Assets\scripts\Dzoouh!.cs" />
     <Compile Include="Assets\scripts\MiniMap1.cs" />
+    <Compile Include="Assets\scripts\NewScript.cs" />
     <Compile Include="Assets\scripts\CheckPoint.cs" />
     <Compile Include="Assets\scripts\LoopVideo.cs" />
     <Compile Include="Assets\scripts\miniMap.cs" />
     <Compile Include="Assets\scripts\LaserBeam.cs" />
+    <Compile Include="Assets\scripts\Locker.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DepthBlit\DepthBlitEdgePass.cs" />
+    <Compile Include="Assets\scripts\Door.cs" />
+    <Compile Include="Assets\walkingAudio.cs" />
     <Compile Include="Assets\scripts\MenuManager.cs" />
     <Compile Include="Assets\scripts\Platform.cs" />
-    <Compile Include="Assets\Door.cs" />
     <Compile Include="Assets\scripts\Interaction.cs" />
     <Compile Include="Assets\scripts\ComputerInteract.cs" />
     <Compile Include="Assets\scripts\FallingPlatforms.cs" />
+    <Compile Include="Assets\scripts\SafeOpen.cs" />
     <Compile Include="Assets\scripts\ComputerTriggerScript.cs" />
+    <Compile Include="Assets\scripts\PickUpInteraction.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\CameraStacking\3D Skybox\Scripts\SkyboxCamera.cs" />
+    <Compile Include="Assets\scripts\PickUpText.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DepthBlit\DepthBlitFeature.cs" />
     <Compile Include="Assets\scripts\FollowYRotation.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\LensFlares\Scripts\ScreenSpacePlacement.cs" />
-    <Compile Include="Assets\PickUpInteraction.cs" />
     <Compile Include="Assets\URP\Samples\Universal RP\14.0.11\URP Package Samples\RendererFeatures\DistortTunnel\DistortTunnelRendererFeature.cs" />
     <Compile Include="Assets\action maps\PlayerController.cs" />
     <Compile Include="Assets\scripts\TriggerPrompts.cs" />
+    <Compile Include="Assets\scripts\KeypadTrigger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
