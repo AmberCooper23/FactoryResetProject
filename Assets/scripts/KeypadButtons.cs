@@ -10,6 +10,7 @@ public class KeypadButtons : MonoBehaviour
     private int currentButtonIndex = 0;
     private Vector3[] originalScales;
     private int[,] navigationRules;
+    private const int NumberOfKeypadButtons = 10;
 
     public void Start()
     {
@@ -36,7 +37,7 @@ public class KeypadButtons : MonoBehaviour
             { 8, 0, 6, 8 },  // From button 9: Up -> 6, Down -> 3, Left -> 8, Right -> 7 - 10
 
 
-       }; 
+       };
 
         playerInput.Keypad.Up.performed += ctx => NavigateKeypad(0);
         playerInput.Keypad.Down.performed += ctx => NavigateKeypad(1);
@@ -44,7 +45,20 @@ public class KeypadButtons : MonoBehaviour
         playerInput.Keypad.Right.performed += ctx => NavigateKeypad(3);
         playerInput.Keypad.Select.performed += ctx => SelectButton();
 
-        
+
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i <= NumberOfKeypadButtons; i++)
+        {
+            if (Input.GetKeyDown((KeyCode)(KeyCode.Keypad1 + i)))
+            {
+                currentButtonIndex = i;
+                UpdateButtonSelection();
+                SelectButton();
+            }
+        }
     }
 
     private void OnDisable()

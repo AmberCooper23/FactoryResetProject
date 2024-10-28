@@ -81,11 +81,11 @@ public class FirstPersonControls : MonoBehaviour
     public AudioSource dropClip;
     //public AudioSource computerClip;
 
-    [Header("Anim checks")]
+    [Header("ANIM CHECKS")]
     [Space(5)]
 
     public bool Iswalking;
-    public bool IsCrouching; 
+    public bool IsCrouching;
 
     //[Header("ANIMATION SETTINGS")]
     //[Space(5)]
@@ -147,7 +147,6 @@ public class FirstPersonControls : MonoBehaviour
         playerInput.MainMenu.Back.performed += ctx => BackButton();
 
         playerInput.Player.Pause.performed += ctx => PauseGame();
-
        
 
     }
@@ -307,6 +306,7 @@ public class FirstPersonControls : MonoBehaviour
         characterController.Move(velocity * Time.deltaTime); // Apply the velocity to the character
     }
 
+
     public void Jump()
     {
         if (characterController.isGrounded)
@@ -353,7 +353,7 @@ public class FirstPersonControls : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, pickUpRange))
         {
-            pickUpClip.Play();
+            //pickUpClip.Play();
             // Check if the hit object has the tag "PickUp"
             if (hit.collider.CompareTag("PickUp"))
             {

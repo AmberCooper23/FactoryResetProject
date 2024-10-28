@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Interaction : MonoBehaviour
 {
+
+    [Header("EXAMINE SETTINGS")]
+    [Space(5)]
     public float interactionDistance;
     public GameObject interactionText;
     public LayerMask interactionLayers;
+
+
+
 
     private void FixedUpdate()
     {
