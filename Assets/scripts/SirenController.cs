@@ -28,7 +28,8 @@ public class SirenController : MonoBehaviour
         {
             if (fpController.hasCard)
             {
-                TurnOffSiren();
+                //TurnOffSiren();
+                emergencySiren.SetActive(false); 
                 textTrigger.SetActive(false );
             }
             else
@@ -47,6 +48,7 @@ public class SirenController : MonoBehaviour
     public void TurnOffSiren()
     {
         emergencySiren.SetActive(false);
+         
     }
 
     //public void HoldingCard()

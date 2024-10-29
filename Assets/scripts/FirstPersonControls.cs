@@ -5,6 +5,7 @@
 //using UnityEditor.ShaderGraph;
 //using UnityEditor.ShaderGraph.Drawing;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -17,6 +18,10 @@ public class FirstPersonControls : MonoBehaviour
     private bool OpenDoor2;
     public GameObject pauseMenuUI;
     public static bool GameIsPaused = false;
+
+    public GameObject emergencySiren; // Assign the siren GameObject in the Inspector
+
+    public SirenController sirenController;
 
     public GameObject playerPickUp;
     
@@ -440,15 +445,8 @@ public class FirstPersonControls : MonoBehaviour
         {
             if (hit.collider.CompareTag("Switch")) // Assuming the switch has this tag
             {
-                // Change the material color of the objects in the array
-                foreach (GameObject obj in objectsToChangeColor)
-                {
-                    Renderer renderer = obj.GetComponent<Renderer>();
-                    if (renderer != null)
-                    {
-                        renderer.material.color = switchMaterial.color; // Set the color to match the switch material color
-                    }
-                }
+               sirenController.TurnOffSiren();
+                sirenController.sirenOnTrigger.enabled = false;
             }
 
             else if (hit.collider.CompareTag("Door")) // Check if the object is a door
@@ -457,11 +455,17 @@ public class FirstPersonControls : MonoBehaviour
                 StartCoroutine(SlideDoor(hit.collider.gameObject));
             }
 
-            else if (hit.collider.CompareTag("Door2"))
-            {
+            //else if (hit.collider.CompareTag("Door2"))
+            //{
 
-            }
+            //}
         }
+    }
+
+    public void TurnOffSiren()
+    {
+        emergencySiren.SetActive(false);
+
     }
 
     private IEnumerator SlideDoor(GameObject door)
