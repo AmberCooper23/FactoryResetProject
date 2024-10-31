@@ -27,9 +27,11 @@ public class FirstPersonControls : MonoBehaviour
     
     bool toggle;
 
-    private PlayerController playerInput;
+    public PlayerController playerInput;
 
     public bool hasCard = false;
+
+    private LetterScript letterScript; 
 
 
     [Header("MOVEMENT SETTINGS")]
@@ -92,6 +94,7 @@ public class FirstPersonControls : MonoBehaviour
     public bool Iswalking;
     public bool IsCrouching;
 
+
     //[Header("ANIMATION SETTINGS")]
     //[Space(5)]
     public Animator animator; //Reference to the Animator component 
@@ -152,13 +155,13 @@ public class FirstPersonControls : MonoBehaviour
         playerInput.MainMenu.Back.performed += ctx => BackButton();
 
         playerInput.Player.Pause.performed += ctx => PauseGame();
-       
 
+        
     }
 
     private void OnDisable()
     {
-        playerInput.Player.Disable();
+        //playerInput.Player.Disable();
     }
 
 
@@ -193,6 +196,8 @@ public class FirstPersonControls : MonoBehaviour
 
         
     }
+
+   
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -454,7 +459,7 @@ public class FirstPersonControls : MonoBehaviour
                 // Start moving the door upwards
                 StartCoroutine(SlideDoor(hit.collider.gameObject));
             }
-
+           
             //else if (hit.collider.CompareTag("Door2"))
             //{
 

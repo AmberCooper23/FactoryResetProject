@@ -524,11 +524,11 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ae77eb12-0cbf-4901-8215-3b616dbcb47a"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""id"": ""55a65c13-d4ac-4276-b1d2-1eb901cab0b2"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Gamepad"",
+                    ""groups"": """",
                     ""action"": ""Read"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

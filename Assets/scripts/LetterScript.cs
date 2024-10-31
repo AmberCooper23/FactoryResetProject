@@ -10,13 +10,14 @@ public class LetterScript : MonoBehaviour
 
     private void OnEnable()
     {
-       
+
         //playerInput.Player.Enable();
 
     }
 
     public void openCloseLetter()
     {
+        Debug.Log("Please open tuuuuuuu!");
         toggle = !toggle;
         if (toggle == false)
         {
