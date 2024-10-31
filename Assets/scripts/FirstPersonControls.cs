@@ -88,6 +88,11 @@ public class FirstPersonControls : MonoBehaviour
     public AudioSource dropClip;
     //public AudioSource computerClip;
 
+    [Header("LIGHT SWITCH VARIABLES")]
+    [Space(5)]
+    public bool lightOn = false;
+    public LightSwitchScript lightSwitchScript;
+
     [Header("ANIM CHECKS")]
     [Space(5)]
 
@@ -459,6 +464,10 @@ public class FirstPersonControls : MonoBehaviour
                 // Start moving the door upwards
                 StartCoroutine(SlideDoor(hit.collider.gameObject));
             }
+            else if (hit.collider.CompareTag("LightSwitch"))
+            {
+                lightSwitchScript.ToggleLight();
+            }
            
             //else if (hit.collider.CompareTag("Door2"))
             //{
@@ -466,6 +475,22 @@ public class FirstPersonControls : MonoBehaviour
             //}
         }
     }
+
+    //private void ToggleLight()
+    //{
+    //    if (lightOn)
+    //    {
+    //        lightSwitch.Play(switchOff.name); // Play switch-off animation
+    //        lightOn = false;
+    //        Debug.Log("LightTurnedOff");
+    //    }
+    //    else
+    //    {
+    //        lightSwitch.Play(switchOn.name); // Play switch-on animation
+    //        lightOn = true;
+    //        Debug.Log("LightTurnedOn");
+    //    }
+    //}
 
     public void TurnOffSiren()
     {

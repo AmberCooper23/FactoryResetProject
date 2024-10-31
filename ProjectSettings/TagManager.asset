@@ -18,6 +18,7 @@ TagManager:
   - Clap
   - enableSiren
   - KeyCard
+  - LightSwitch
   layers:
   - Default
   - TransparentFX
