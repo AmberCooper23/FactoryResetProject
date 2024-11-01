@@ -9,6 +9,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FirstPersonControls : MonoBehaviour
 {
@@ -31,7 +32,11 @@ public class FirstPersonControls : MonoBehaviour
 
     public bool hasCard = false;
 
-    private LetterScript letterScript; 
+    private LetterScript letterScript;
+
+    public GameObject promptTriggers;
+
+    public GameObject doorLock; 
 
 
     [Header("MOVEMENT SETTINGS")]
@@ -455,6 +460,8 @@ public class FirstPersonControls : MonoBehaviour
         {
             if (hit.collider.CompareTag("Switch")) // Assuming the switch has this tag
             {
+                doorLock.SetActive(false); 
+                promptTriggers.SetActive(false); 
                sirenController.TurnOffSiren();
                 sirenController.sirenOnTrigger.enabled = false;
             }
