@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnlocksDoors : MonoBehaviour
 {
     public GameObject emergencySiren; // Assign the siren GameObject in the Inspector
-    public Collider sirenOnTrigger; // Assign the trigger to disable
-
+    public Collider sirenOnTrigger;
+    public GameObject unlockDoorTrigger;// Assign the trigger to disable
+    public GameObject doorUnlocked;
+    public GameObject unlockDoorTriggerText;
     // public GameObject keyCard;
     //  public bool hasCard;
 
@@ -17,6 +20,7 @@ public class UnlocksDoors : MonoBehaviour
     {
         // Ensure the initial state is set correctly
         sirenOnTrigger.enabled = true;
+        unlockDoorTrigger.SetActive(true);   
 
     }
 
@@ -27,6 +31,9 @@ public class UnlocksDoors : MonoBehaviour
             if (fpController.hasCard)
             {
                 TurnOffSiren();
+                unlockDoorTrigger.SetActive(false);
+                unlockDoorTriggerText.SetActive(false);
+                StartCoroutine(ShowDoorUnlocked());
             }
             else
             {
@@ -45,5 +52,12 @@ public class UnlocksDoors : MonoBehaviour
     {
         emergencySiren.SetActive(false);
 
+    }
+
+    private IEnumerator ShowDoorUnlocked()
+    {
+        doorUnlocked.SetActive(true);
+        yield return new WaitForSeconds(3);
+        doorUnlocked.SetActive(false);
     }
 }

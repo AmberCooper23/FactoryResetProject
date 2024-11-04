@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class SirenController : MonoBehaviour
@@ -7,6 +8,7 @@ public class SirenController : MonoBehaviour
     public GameObject emergencySiren; // Assign the siren GameObject in the Inspector
     public Collider sirenOnTrigger; // Assign the trigger to disable
     [SerializeField] private Animator switchHandle;
+   
     // public GameObject keyCard;
     //  public bool hasCard;
 
@@ -31,6 +33,7 @@ public class SirenController : MonoBehaviour
                 //TurnOffSiren();
                 emergencySiren.SetActive(false); 
                 textTrigger.SetActive(false );
+                    
             }
             else
             {
@@ -59,6 +62,8 @@ public class SirenController : MonoBehaviour
         switchHandle.SetBool("SwitchOff", false);
         switchHandle.enabled = false;
     }
+
+   
 
     //public void HoldingCard()
     //{
