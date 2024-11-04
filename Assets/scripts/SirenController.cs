@@ -6,9 +6,9 @@ public class SirenController : MonoBehaviour
 {
     public GameObject emergencySiren; // Assign the siren GameObject in the Inspector
     public Collider sirenOnTrigger; // Assign the trigger to disable
-
-   // public GameObject keyCard;
-  //  public bool hasCard;
+    [SerializeField] private Animator switchHandle;
+    // public GameObject keyCard;
+    //  public bool hasCard;
 
 
     public FirstPersonControls fpController;
@@ -48,7 +48,16 @@ public class SirenController : MonoBehaviour
     public void TurnOffSiren()
     {
         emergencySiren.SetActive(false);
-         
+        switchHandle.SetBool("SwitchOff", true);
+        StartCoroutine("SwitchOffAlarm");
+
+    }
+
+    IEnumerator SwitchOffAlarm()
+    {
+        yield return new WaitForSeconds(1f);
+        switchHandle.SetBool("SwitchOff", false);
+        switchHandle.enabled = false;
     }
 
     //public void HoldingCard()

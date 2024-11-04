@@ -36,6 +36,7 @@ public class PauseScript : MonoBehaviour
 
     public void Update()
     {
+
         Vector2 moveInput = playerInput.MainMenu.Navigation.ReadValue<Vector2>();
 
         if (moveInput.y > 0 || moveInput.y < 0)

@@ -7,7 +7,7 @@ public class KeypadForSafe : MonoBehaviour
 {
     public Text AnswerForSafe;
     [SerializeField] private Animator Door;
-    private string correctCode = "2683111";
+    private string correctCode = "12178445";
 
     public void Number(int number)
     {

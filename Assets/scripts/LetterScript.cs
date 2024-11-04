@@ -22,10 +22,12 @@ public class LetterScript : MonoBehaviour
         if (toggle == false)
         {
             letterUI.SetActive(false);
+            
         }
         if (toggle == true)
         {
             letterUI.SetActive(true);
+         
         }
     }
 }
