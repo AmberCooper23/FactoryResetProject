@@ -5,12 +5,20 @@ using UnityEngine;
 public class KeypadTrigger : MonoBehaviour
 {
     [SerializeField] private Keypad keypad;
+    private FirstPersonControls firstPersonControls;
+    public GameObject player; 
+
+    private void Awake()
+    {
+        firstPersonControls = player.GetComponent<FirstPersonControls>(); 
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            keypad.gameObject.SetActive(true); 
+            keypad.gameObject.SetActive(true);
+            DisablePlayerMovement(); 
         }
     }
 
@@ -23,5 +31,13 @@ public class KeypadTrigger : MonoBehaviour
         }
     }
 
-    
+    public void DisablePlayerMovement()
+    {
+        if(firstPersonControls != null)
+        {
+            firstPersonControls.enabled = false;    
+        }
+    }
+
+
 }

@@ -8,6 +8,14 @@ public class LetterScript : MonoBehaviour
     public GameObject letterUI;
     bool toggle;
 
+    private FirstPersonControls firstPersonControls;
+    public GameObject player;
+
+    private void Awake()
+    {
+        firstPersonControls = player.GetComponent<FirstPersonControls>();
+    }
+
     private void OnEnable()
     {
 
@@ -22,12 +30,30 @@ public class LetterScript : MonoBehaviour
         if (toggle == false)
         {
             letterUI.SetActive(false);
+            EnablePlayerMovement(); 
             
         }
         if (toggle == true)
         {
             letterUI.SetActive(true);
-         
+            DisablePlayerMovement();
+
+        }
+    }
+
+    public void DisablePlayerMovement()
+    {
+        if (firstPersonControls != null)
+        {
+            firstPersonControls.enabled = false;
+        }
+    }
+
+    public void EnablePlayerMovement()
+    {
+        if (firstPersonControls != null)
+        {
+            firstPersonControls.enabled = true;
         }
     }
 }

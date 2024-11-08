@@ -8,6 +8,13 @@ public class KeypadForSafe : MonoBehaviour
     public Text AnswerForSafe;
     [SerializeField] private Animator Door;
     private string correctCode = "12178445";
+    private FirstPersonControls firstPersonControls;
+    public GameObject player;
+
+    private void Awake()
+    {
+        firstPersonControls = player.GetComponent<FirstPersonControls>();
+    }
 
     public void Number(int number)
     {
@@ -21,6 +28,7 @@ public class KeypadForSafe : MonoBehaviour
             AnswerForSafe.text = "OPENED";
             Door.SetBool("Open", true);
             StartCoroutine("StopDoor");
+            EnablePlayerMovement();
         }
         else
         {
@@ -33,5 +41,13 @@ public class KeypadForSafe : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Door.SetBool("Open", false);
         Door.enabled = false;
+    }
+
+    private void EnablePlayerMovement()
+    {
+        if (firstPersonControls != null)
+        {
+            firstPersonControls.enabled = true;
+        }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class TriggerPrompts : MonoBehaviour
 {
     public GameObject promptText;
+    public GameObject promptTrigger;
 
     public void Start()
     {
@@ -25,6 +26,7 @@ public class TriggerPrompts : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             promptText.SetActive(false);
+            Destroy(promptTrigger);
         }
     }
 }
