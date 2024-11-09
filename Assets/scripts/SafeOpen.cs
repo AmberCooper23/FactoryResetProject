@@ -10,6 +10,7 @@ public class KeypadForSafe : MonoBehaviour
     private string correctCode = "12178445";
     private FirstPersonControls firstPersonControls;
     public GameObject player;
+    public GameObject keypadTrigger;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class KeypadForSafe : MonoBehaviour
             Door.SetBool("Open", true);
             StartCoroutine("StopDoor");
             EnablePlayerMovement();
+            keypadTrigger.SetActive(false);
         }
         else
         {

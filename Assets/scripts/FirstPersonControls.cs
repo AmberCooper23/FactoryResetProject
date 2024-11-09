@@ -4,10 +4,13 @@
 //using 
 //using UnityEditor.ShaderGraph;
 //using UnityEditor.ShaderGraph.Drawing;
+using System;
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -20,12 +23,14 @@ public class FirstPersonControls : MonoBehaviour
     public GameObject pauseMenuUI;
     public static bool GameIsPaused = false;
 
+    AudioSource audioSource;
+
     public GameObject emergencySiren; // Assign the siren GameObject in the Inspector
 
     public SirenController sirenController;
 
     public GameObject playerPickUp;
-    
+
     bool toggle;
 
     public PlayerController playerInput;
@@ -36,7 +41,14 @@ public class FirstPersonControls : MonoBehaviour
 
     public GameObject promptTriggers;
 
-    public GameObject doorLock; 
+    public GameObject doorLock;
+
+    public TextMeshProUGUI messageText;
+
+    public GameObject objectToCheck;
+
+    [Header("Camera")]
+    public Camera cam; 
 
 
     [Header("MOVEMENT SETTINGS")]
@@ -104,6 +116,20 @@ public class FirstPersonControls : MonoBehaviour
     public bool Iswalking;
     public bool IsCrouching;
 
+    [Header("Attacking")]
+    public float attackDistance = 5f;
+    public float attackDelay = 0.4f;
+    public float attackSpeed = 1f;
+    public int attackDamage = 1;
+    public LayerMask attackLayer;
+
+    
+    public AudioClip wrenchHitSound;
+
+    bool attacking = false;
+    bool readyToAttack = true;
+    int attackCount; 
+
 
     //[Header("ANIMATION SETTINGS")]
     //[Space(5)]
@@ -116,6 +142,7 @@ public class FirstPersonControls : MonoBehaviour
         // Get and store the CharacterController component attached to this GameObject
         characterController = GetComponent<CharacterController>();
         playerInput = new PlayerController();
+        audioSource = GetComponent<AudioSource>();
 
         pauseMenuUI.SetActive(false);
 
@@ -165,6 +192,8 @@ public class FirstPersonControls : MonoBehaviour
         playerInput.MainMenu.Back.performed += ctx => BackButton();
 
         playerInput.Player.Pause.performed += ctx => PauseGame();
+
+        playerInput.Player.Attack.performed += ctx => Attack();
 
         
     }
@@ -399,6 +428,8 @@ public class FirstPersonControls : MonoBehaviour
                 heldObject.transform.parent = holdPosition;
 
                 holdingGun = true;
+
+                CheckObjectTagAndDisplayMessage();
             }
 
             else if (hit.collider.CompareTag("KeyCard"))
@@ -413,6 +444,8 @@ public class FirstPersonControls : MonoBehaviour
                 heldObject.transform.parent = holdPosition;
 
                 hasCard = true;
+
+                CheckObjectTagAndDisplayMessage();
             }
         }
     }
@@ -464,6 +497,7 @@ public class FirstPersonControls : MonoBehaviour
                 promptTriggers.SetActive(false); 
                sirenController.TurnOffSiren();
                 sirenController.sirenOnTrigger.enabled = false;
+                CheckObjectTagAndDisplayMessage();
             }
 
             else if (hit.collider.CompareTag("Door")) // Check if the object is a door
@@ -471,10 +505,18 @@ public class FirstPersonControls : MonoBehaviour
                 // Start moving the door upwards
                 StartCoroutine(SlideDoor(hit.collider.gameObject));
             }
+
+            else if (hit.collider.CompareTag("Door2"))
+            {
+                StartCoroutine(SlideDoor(hit.collider.gameObject));
+                CheckObjectTagAndDisplayMessage();
+
+            }
             else if (hit.collider.CompareTag("LightSwitch"))
             {
                 lightSwitchScript.ToggleLight();
             }
+
            
             //else if (hit.collider.CompareTag("Door2"))
             //{
@@ -521,11 +563,68 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
-    
+    private void CheckObjectTagAndDisplayMessage()
+    {
+        // Example: Check the tag of the objectToCheck and display different messages
+        if (objectToCheck.CompareTag("Door2"))
+        {
+            messageText.text = "SWITCH OFF THE EMERGENCY SIREN";
+        }
+
+        else if (objectToCheck.CompareTag("Switch"))
+        {
+            messageText.text = "EXPLORE THE OFFICE FOR INFORMATION AND SUPPLIES";
+        }
+
+        else if (objectToCheck.CompareTag("Gun"))
+        {
+            messageText.text = "LOOK AROUND FOR LENA AND THE ROBOT'S PICTURE";
+        }
+
+        else if (objectToCheck.CompareTag("KeyCard"))
+        {
+            messageText.text = "PROCEED TO UNLOCK THE OFFICE DOOR WITH THE KEYCARD";
+        }
+
+    }
+
+    public void Attack()
+    {
+        if (!readyToAttack || attacking) return;
+
+        readyToAttack = false;
+        attacking = true;
+
+        Invoke(nameof(ResetAttack), attackSpeed);
+        Invoke(nameof(AttackRaycast), attackDelay);
+
+        audioSource.PlayOneShot(wrenchHitSound);
+    }
+
+    void ResetAttack()
+    {
+        attacking = false;
+        readyToAttack = true; 
+    }
+
+    void AttackRaycast()
+    {
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
+        {
+            HitTarget(hit.point);
+        }
+    }
+
+    void HitTarget(Vector3 pos)
+    {
+        audioSource.pitch = 1;
+        audioSource.PlayOneShot(wrenchHitSound); 
+
+    }
 
     //private void OnTriggerEnter(Collider other)
     //{
-        
+
     //}
 
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LetterScriptForKeycard : MonoBehaviour
@@ -35,6 +36,7 @@ public class LetterScriptForKeycard : MonoBehaviour
         {
             letterUI.SetActive(true);
             DisablePlayerMovement();
+
         }
     }
 

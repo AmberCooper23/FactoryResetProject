@@ -134,6 +134,15 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""ffea8784-9323-4576-8928-c83acb350dbb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -530,6 +539,28 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Read"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb980c99-d967-4546-bb6d-472befd282e4"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2b4b709e-9622-4060-8ab3-f82b690f0deb"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1254,6 +1285,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         m_Player_SwitchMap = m_Player.FindAction("SwitchMap", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Read = m_Player.FindAction("Read", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         // Computer
         m_Computer = asset.FindActionMap("Computer", throwIfNotFound: true);
         m_Computer_DisplayControls = m_Computer.FindAction("DisplayControls", throwIfNotFound: true);
@@ -1353,6 +1385,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SwitchMap;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Read;
+    private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
         private @PlayerController m_Wrapper;
@@ -1369,6 +1402,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         public InputAction @SwitchMap => m_Wrapper.m_Player_SwitchMap;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Read => m_Wrapper.m_Player_Read;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1414,6 +1448,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Read.started += instance.OnRead;
             @Read.performed += instance.OnRead;
             @Read.canceled += instance.OnRead;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1454,6 +1491,9 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
             @Read.started -= instance.OnRead;
             @Read.performed -= instance.OnRead;
             @Read.canceled -= instance.OnRead;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1821,6 +1861,7 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
         void OnSwitchMap(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnRead(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
     public interface IComputerActions
     {

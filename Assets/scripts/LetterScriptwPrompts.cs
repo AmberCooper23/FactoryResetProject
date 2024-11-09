@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class LetterScript : MonoBehaviour
+public class LetterScriptwPrompts : MonoBehaviour
 {
     public GameObject letterUI;
     bool toggle;
-    
+    public TextMeshProUGUI messageText;
 
     private FirstPersonControls firstPersonControls;
     public GameObject player;
-   
+    public GameObject objectToCheck;
 
     private void Awake()
     {
@@ -34,7 +33,9 @@ public class LetterScript : MonoBehaviour
         {
             letterUI.SetActive(false);
             EnablePlayerMovement();
-            
+
+            CheckObjectTagAndDisplayMessage();
+
         }
         if (toggle == true)
         {
@@ -57,6 +58,19 @@ public class LetterScript : MonoBehaviour
         if (firstPersonControls != null)
         {
             firstPersonControls.enabled = true;
+        }
+    }
+
+    private void CheckObjectTagAndDisplayMessage()
+    {
+        // Example: Check the tag of the objectToCheck and display different messages
+        if (objectToCheck.CompareTag("StickyNote"))
+        {
+            messageText.text = "PUT IN THE KEYCODE FOR THE LOCKER ROOM";
+        }
+        else if (objectToCheck.CompareTag("Activation"))
+        {
+            messageText.text = "YOU HAVE FOUND THE SAFE KEYCODE. YOU MAY NOW UNLOCK THE SAFE";
         }
     }
 }

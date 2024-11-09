@@ -19,6 +19,9 @@ TagManager:
   - enableSiren
   - KeyCard
   - LightSwitch
+  - StickyNote
+  - Keypad
+  - Dzoouh
   layers:
   - Default
   - TransparentFX

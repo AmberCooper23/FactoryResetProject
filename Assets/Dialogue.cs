@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEditor;
 
+
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
@@ -33,6 +34,7 @@ public class Dialogue : MonoBehaviour
             }
         } 
     }
+
 
     void StartDialogue()
     {
