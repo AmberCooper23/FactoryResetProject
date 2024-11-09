@@ -63,27 +63,5 @@ public class SirenController : MonoBehaviour
         switchHandle.enabled = false;
     }
 
-   
-
-    //public void HoldingCard()
-    //{
-    //    if(fpController.hasCard == true && triggerToDisable != null)
-    //    {
-
-    //    }
-    //}
-
-    //public void TurnOffSiren(FirstPersonController fpController)
-    //{
-    //    // call a game object for keycard (referencing) , need bool for hasCard , if (bool hasCard == true && OnTriggerEnter triggerToDisable) 
-
-    //    if (hasCard = true && triggerToDisable != null)
-    //    {
-    //        // Disable the siren
-    //        emergencySiren.SetActive(false);
-    //        // Switch triggers
-    //       triggerToEnable.enabled = false;
-    //        triggerToDisable.enabled = true;
-    //    }
-    //}   
+  
 }

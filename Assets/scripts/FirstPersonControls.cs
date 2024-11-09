@@ -414,6 +414,8 @@ public class FirstPersonControls : MonoBehaviour
                 heldObject.transform.position = holdPosition.position;
                 heldObject.transform.rotation = holdPosition.rotation;
                 heldObject.transform.parent = holdPosition;
+
+                CheckObjectTagAndDisplayMessage();
             }
             else if (hit.collider.CompareTag("Gun"))
             {
@@ -498,6 +500,8 @@ public class FirstPersonControls : MonoBehaviour
                sirenController.TurnOffSiren();
                 sirenController.sirenOnTrigger.enabled = false;
                 CheckObjectTagAndDisplayMessage();
+
+                Debug.Log("Siren switched off");
             }
 
             else if (hit.collider.CompareTag("Door")) // Check if the object is a door
@@ -584,6 +588,11 @@ public class FirstPersonControls : MonoBehaviour
         else if (objectToCheck.CompareTag("KeyCard"))
         {
             messageText.text = "PROCEED TO UNLOCK THE OFFICE DOOR WITH THE KEYCARD";
+        }
+
+        else if (objectToCheck.CompareTag("PickUp"))
+        {
+            messageText.text = "DROP THE WRENCH ON THE PROTOTYPE ROBOT TO MOVE HIM OUT OF THE WAY!";
         }
 
     }
