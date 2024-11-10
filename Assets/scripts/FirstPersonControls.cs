@@ -47,6 +47,13 @@ public class FirstPersonControls : MonoBehaviour
 
     public GameObject objectToCheck;
 
+    public GameObject objectToCheckSwitch;
+
+    public GameObject objectCheckGun;
+
+    public GameObject objectCheckDoor2;
+
+    public GameObject objectCheckWrench; 
     [Header("Camera")]
     public Camera cam; 
 
@@ -193,7 +200,6 @@ public class FirstPersonControls : MonoBehaviour
 
         playerInput.Player.Pause.performed += ctx => PauseGame();
 
-        playerInput.Player.Attack.performed += ctx => Attack();
 
         
     }
@@ -415,7 +421,7 @@ public class FirstPersonControls : MonoBehaviour
                 heldObject.transform.rotation = holdPosition.rotation;
                 heldObject.transform.parent = holdPosition;
 
-                CheckObjectTagAndDisplayMessage();
+                CheckWrenchAndDisplayMessage();
             }
             else if (hit.collider.CompareTag("Gun"))
             {
@@ -431,7 +437,7 @@ public class FirstPersonControls : MonoBehaviour
 
                 holdingGun = true;
 
-                CheckObjectTagAndDisplayMessage();
+                CheckGunAndDisplayMessage();
             }
 
             else if (hit.collider.CompareTag("KeyCard"))
@@ -447,7 +453,7 @@ public class FirstPersonControls : MonoBehaviour
 
                 hasCard = true;
 
-                CheckObjectTagAndDisplayMessage();
+                CheckKeycardAndDisplayMessage();
             }
         }
     }
@@ -499,9 +505,11 @@ public class FirstPersonControls : MonoBehaviour
                 promptTriggers.SetActive(false); 
                sirenController.TurnOffSiren();
                 sirenController.sirenOnTrigger.enabled = false;
-                CheckObjectTagAndDisplayMessage();
+                
 
                 Debug.Log("Siren switched off");
+
+                CheckSwitchTagAndDisplayMessage();
             }
 
             else if (hit.collider.CompareTag("Door")) // Check if the object is a door
@@ -513,7 +521,7 @@ public class FirstPersonControls : MonoBehaviour
             else if (hit.collider.CompareTag("Door2"))
             {
                 StartCoroutine(SlideDoor(hit.collider.gameObject));
-                CheckObjectTagAndDisplayMessage();
+                CheckDoor2TagAndDisplayMessage();
 
             }
             else if (hit.collider.CompareTag("LightSwitch"))
@@ -567,67 +575,49 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
-    private void CheckObjectTagAndDisplayMessage()
+    private void CheckDoor2TagAndDisplayMessage()
     {
         // Example: Check the tag of the objectToCheck and display different messages
         if (objectToCheck.CompareTag("Door2"))
         {
             messageText.text = "SWITCH OFF THE EMERGENCY SIREN";
         }
+    }
 
-        else if (objectToCheck.CompareTag("Switch"))
+    private void CheckSwitchTagAndDisplayMessage()
+    {
+        if (objectToCheckSwitch.CompareTag("Switch"))
         {
             messageText.text = "EXPLORE THE OFFICE FOR INFORMATION AND SUPPLIES";
         }
+    }
 
-        else if (objectToCheck.CompareTag("Gun"))
+    private void CheckGunAndDisplayMessage()
+    {
+        if (objectCheckGun.CompareTag("Gun"))
         {
             messageText.text = "LOOK AROUND FOR LENA AND THE ROBOT'S PICTURE";
         }
+    }
 
-        else if (objectToCheck.CompareTag("KeyCard"))
+     public void CheckKeycardAndDisplayMessage()
+    {
+
+        if (objectToCheck.CompareTag("KeyCard"))
         {
             messageText.text = "PROCEED TO UNLOCK THE OFFICE DOOR WITH THE KEYCARD";
         }
+    }
 
-        else if (objectToCheck.CompareTag("PickUp"))
+    public void CheckWrenchAndDisplayMessage()
+    {
+        if (objectCheckWrench.CompareTag("PickUp"))
         {
-            messageText.text = "DROP THE WRENCH ON THE PROTOTYPE ROBOT TO MOVE HIM OUT OF THE WAY!";
-        }
-
-    }
-
-    public void Attack()
-    {
-        if (!readyToAttack || attacking) return;
-
-        readyToAttack = false;
-        attacking = true;
-
-        Invoke(nameof(ResetAttack), attackSpeed);
-        Invoke(nameof(AttackRaycast), attackDelay);
-
-        audioSource.PlayOneShot(wrenchHitSound);
-    }
-
-    void ResetAttack()
-    {
-        attacking = false;
-        readyToAttack = true; 
-    }
-
-    void AttackRaycast()
-    {
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
-        {
-            HitTarget(hit.point);
+            messageText.text = "DROP THE WRENCH ON THE ROBOT TO MOVE IT OUT OF THE WAY!";
         }
     }
 
-    void HitTarget(Vector3 pos)
-    {
-        audioSource.pitch = 1;
-        audioSource.PlayOneShot(wrenchHitSound); 
+      
 
     }
 
@@ -650,4 +640,3 @@ public class FirstPersonControls : MonoBehaviour
     //    }
     //}
 
-}

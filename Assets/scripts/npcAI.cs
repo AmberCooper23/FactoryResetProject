@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI; 
@@ -11,7 +12,11 @@ public class npcAI : MonoBehaviour
     NavMeshAgent agent;
     int waypointIndex;
     Vector3 target;
-    private bool isMoving = false; 
+    private bool isMoving = false;
+
+    public GameObject objectCheckWrench;
+    public TextMeshProUGUI messageText;
+
 
     // Start is called before the first frame update
     void Start()
@@ -67,6 +72,16 @@ public class npcAI : MonoBehaviour
         {
             agent.enabled = true; 
            isMoving = true;
+
+            CheckObjectTagAndDisplayMessage();
+        }
+    }
+
+    private void CheckObjectTagAndDisplayMessage()
+    {
+        if (objectCheckWrench.CompareTag("PickUp"))
+        {
+            messageText.text = "STAY OUT OF THE ROBOT'S WAY WHILE CLEANING!";
         }
     }
 }

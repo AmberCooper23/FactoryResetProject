@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ public class UnlocksDoors : MonoBehaviour
     public GameObject unlockDoorTrigger;// Assign the trigger to disable
     public GameObject doorUnlocked;
     public GameObject unlockDoorTriggerText;
+    public GameObject objectToCheckSwitch;
+    public TextMeshProUGUI messageText;
     // public GameObject keyCard;
     //  public bool hasCard;
 
