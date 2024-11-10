@@ -37,6 +37,8 @@ public class FirstPersonControls : MonoBehaviour
 
     public bool hasCard = false;
 
+    public bool hasPhoto = false; 
+
     private LetterScript letterScript;
 
     public GameObject promptTriggers;
@@ -53,7 +55,17 @@ public class FirstPersonControls : MonoBehaviour
 
     public GameObject objectCheckDoor2;
 
-    public GameObject objectCheckWrench; 
+    public GameObject objectCheckWrench;
+
+    public GameObject objectTrigger;
+
+    public GameObject welcomeText;
+
+    public GameObject lenaPhoto;
+
+  
+
+    [SerializeField] private Animator ConsoleAnimation;
     [Header("Camera")]
     public Camera cam; 
 
@@ -217,32 +229,32 @@ public class FirstPersonControls : MonoBehaviour
         LookAround();
         ApplyGravity();
 
-/*        Debug.Log(transform.position);
+        /*        Debug.Log(transform.position);
 
-        if (Open && Hinge.rotation.y < 0.9f)
-        {
-            Hinge.Rotate(0, 140 * Time.deltaTime, 0);
-        }
-        else if (Hinge.rotation.y > 0.9f)
-        {
-            Open = false;
-        }
-        Debug.Log(Hinge.rotation.y);
+                if (Open && Hinge.rotation.y < 0.9f)
+                {
+                    Hinge.Rotate(0, 140 * Time.deltaTime, 0);
+                }
+                else if (Hinge.rotation.y > 0.9f)
+                {
+                    Open = false;
+                }
+                Debug.Log(Hinge.rotation.y);
 
-        if(OpenDoor2 && Hinge2.rotation.y < 0.9f)
-        {
-            Hinge2.Rotate(0, 140 * Time.deltaTime, 0);
-        }
-        else if (Hinge2.rotation.y > 0.9f)
-        {
-            OpenDoor2 = false;
-        }
-        Debug.Log(Hinge2.rotation.y);*/
+                if(OpenDoor2 && Hinge2.rotation.y < 0.9f)
+                {
+                    Hinge2.Rotate(0, 140 * Time.deltaTime, 0);
+                }
+                else if (Hinge2.rotation.y > 0.9f)
+                {
+                    OpenDoor2 = false;
+                }
+                Debug.Log(Hinge2.rotation.y);*/
 
-        
+
     }
 
-   
+
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -403,7 +415,7 @@ public class FirstPersonControls : MonoBehaviour
         RaycastHit hit;
 
         // Debugging: Draw the ray in the Scene view
-        Debug.DrawRay(playerCamera.position, playerCamera.forward * pickUpRange, Color.red, 5f);
+        Debug.DrawRay(playerCamera.position, playerCamera.forward * pickUpRange, Color.red, 15f);
 
 
         if (Physics.Raycast(ray, out hit, pickUpRange))
@@ -454,6 +466,25 @@ public class FirstPersonControls : MonoBehaviour
                 hasCard = true;
 
                 CheckKeycardAndDisplayMessage();
+            }
+
+            else if (hit.collider.CompareTag("LenaPic"))
+            {
+                Debug.Log("Retrieved Lena's Photo");
+                heldObject = hit.collider.gameObject;
+                heldObject.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
+
+                // Attach the object to the hold position
+                heldObject.transform.position = holdPosition.position;
+                heldObject.transform.rotation = holdPosition.rotation;
+                heldObject.transform.parent = holdPosition;
+
+                hasPhoto = true;
+                Debug.Log("hasPhoto = true");
+
+                CheckPhotoAndDisplayMessage();
+
+
             }
         }
     }
@@ -528,6 +559,11 @@ public class FirstPersonControls : MonoBehaviour
             {
                 lightSwitchScript.ToggleLight();
             }
+            else if (hit.collider.CompareTag("Bookshelf"))
+            {
+                ConsoleAnimation.SetBool("FinalBoss", true);
+                StartCoroutine("BringUpControlPanel"); 
+            }
 
            
             //else if (hit.collider.CompareTag("Door2"))
@@ -575,6 +611,30 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
+    private IEnumerator BringUpControlPanel()
+    {
+        yield return new WaitForSeconds(2.3f);
+        ConsoleAnimation.SetBool("FinalBoss", false);
+        ConsoleAnimation.enabled = false; 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Welcome"))
+        {
+            CheckWelcomeTriggerandDisplayMessage();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+       if (other.CompareTag("Player"))
+        {
+            welcomeText.SetActive(false);
+            Destroy(objectTrigger); 
+        }
+    }
+
     private void CheckDoor2TagAndDisplayMessage()
     {
         // Example: Check the tag of the objectToCheck and display different messages
@@ -617,6 +677,22 @@ public class FirstPersonControls : MonoBehaviour
         }
     }
 
+
+    public void CheckWelcomeTriggerandDisplayMessage()
+    {
+        if (objectTrigger.CompareTag("Welcome"))
+        {
+            messageText.text = "WELCOME MX37! POWER ON!";
+        }
+    }
+
+    public void CheckPhotoAndDisplayMessage()
+    {
+        if (lenaPhoto.CompareTag("Lena'sPhoto"))
+        {
+            messageText.text = "THERE IS A FINAL DECISION YOU NEED TO MAKE! TAKE THIS PHOTO AND HEAD TO LENA'S OFFICE";
+        }
+    }
       
 
     }

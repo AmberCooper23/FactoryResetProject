@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: activation
+    m_ConditionEvent: FinalBoss
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7104221494771708521}
@@ -86,7 +86,7 @@ AnimatorController:
   m_Name: console animator controller
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: activation
+  - m_Name: FinalBoss
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -112,7 +112,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: console animate again
+  m_Name: ConsoleAnimation
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

@@ -23,6 +23,10 @@ TagManager:
   - Keypad
   - Dzoouh
   - SafeTrigger
+  - Welcome
+  - Bookshelf
+  - Lena'sPhoto
+  - LenaPic
   layers:
   - Default
   - TransparentFX
