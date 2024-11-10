@@ -12,8 +12,8 @@ public class LetterScript : MonoBehaviour
 
     private FirstPersonControls firstPersonControls;
     public GameObject player;
-   
 
+    public AudioSource letterReading;
     private void Awake()
     {
         firstPersonControls = player.GetComponent<FirstPersonControls>();
@@ -38,8 +38,20 @@ public class LetterScript : MonoBehaviour
         }
         if (toggle == true)
         {
-            letterUI.SetActive(true);
-            DisablePlayerMovement();
+           if (CompareTag ("Letter"))
+            {
+                letterUI.SetActive(true);
+                DisablePlayerMovement();
+                letterReading.Play();
+
+            }
+           else
+            {
+               letterUI.SetActive(true);
+               DisablePlayerMovement();
+                letterReading.Pause();
+            }
+            
 
         }
     }

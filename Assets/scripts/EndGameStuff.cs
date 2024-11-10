@@ -27,10 +27,15 @@ public class EndGameStuff : MonoBehaviour
     public GameObject laser15;
     public GameObject laser16;
 
+    public GameObject book; 
+
+    
 
     private void Start()
     {
         LasersDeactivated();
+
+        
 
     }
 
@@ -42,11 +47,13 @@ public class EndGameStuff : MonoBehaviour
             {
                 Debug.Log("EndGame Triggered");
                 LasersActivated();
+                
             }
             else
             {
 
                LasersDeactivated();
+                
             }
         }
     }
@@ -69,6 +76,8 @@ public class EndGameStuff : MonoBehaviour
         laser14.SetActive(true);
         laser15.SetActive(true);
         laser16.SetActive(true);
+        book.SetActive(true);
+        
 
     }
     public void LasersDeactivated()
@@ -89,5 +98,6 @@ public class EndGameStuff : MonoBehaviour
         laser14.SetActive(false);
         laser15.SetActive(false);
         laser16.SetActive(false);
+        book.SetActive(false);  
     }
 }

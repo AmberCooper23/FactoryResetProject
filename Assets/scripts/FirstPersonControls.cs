@@ -63,6 +63,12 @@ public class FirstPersonControls : MonoBehaviour
 
     public GameObject lenaPhoto;
 
+    public GameObject cityDestroy;
+
+    public GameObject factoryDestroy;
+
+    public GameObject switchOff;
+
   
 
     [SerializeField] private Animator ConsoleAnimation;
@@ -122,6 +128,15 @@ public class FirstPersonControls : MonoBehaviour
     public AudioSource walkingClip;
     public AudioSource pickUpClip;
     public AudioSource dropClip;
+    public AudioSource switchOffTheEmergencySiren;
+    public AudioSource exploreTheOfficeAudio;
+    public AudioSource lookAroundForLenaPicAudio;
+    public AudioSource proceedToUnlockAudio;
+    public AudioSource dropWrenchAudio;
+    public AudioSource welcomeAudio;
+    public AudioSource finalDecisionAudio;
+    public AudioSource switchOffSirenAudio;
+
     //public AudioSource computerClip;
 
     [Header("LIGHT SWITCH VARIABLES")]
@@ -564,6 +579,15 @@ public class FirstPersonControls : MonoBehaviour
                 ConsoleAnimation.SetBool("FinalBoss", true);
                 StartCoroutine("BringUpControlPanel"); 
             }
+            else if (hit.collider.CompareTag("CityDestroy"))
+            {
+                cityDestroy.SetActive(true);
+            }
+
+            else if (hit.collider.CompareTag("FactoryDestroy"))
+            {
+                factoryDestroy.SetActive(true); 
+            }
 
            
             //else if (hit.collider.CompareTag("Door2"))
@@ -624,6 +648,11 @@ public class FirstPersonControls : MonoBehaviour
         {
             CheckWelcomeTriggerandDisplayMessage();
         }
+
+        else if (other.gameObject.CompareTag("SwitchOff"))
+        {
+            CheckSwitchOffTag();
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -633,6 +662,11 @@ public class FirstPersonControls : MonoBehaviour
             welcomeText.SetActive(false);
             Destroy(objectTrigger); 
         }
+
+       else if (other.CompareTag("SwitchOff"))
+        {
+            Destroy(switchOff);
+        }
     }
 
     private void CheckDoor2TagAndDisplayMessage()
@@ -641,6 +675,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectToCheck.CompareTag("Door2"))
         {
             messageText.text = "SWITCH OFF THE EMERGENCY SIREN";
+            switchOffTheEmergencySiren.Play();
         }
     }
 
@@ -649,6 +684,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectToCheckSwitch.CompareTag("Switch"))
         {
             messageText.text = "EXPLORE THE OFFICE FOR INFORMATION AND SUPPLIES";
+            exploreTheOfficeAudio.Play();
         }
     }
 
@@ -657,6 +693,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectCheckGun.CompareTag("Gun"))
         {
             messageText.text = "LOOK AROUND FOR LENA AND THE ROBOT'S PICTURE";
+            lookAroundForLenaPicAudio.Play();
         }
     }
 
@@ -666,6 +703,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectToCheck.CompareTag("KeyCard"))
         {
             messageText.text = "PROCEED TO UNLOCK THE OFFICE DOOR WITH THE KEYCARD";
+            proceedToUnlockAudio.Play();
         }
     }
 
@@ -674,6 +712,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectCheckWrench.CompareTag("PickUp"))
         {
             messageText.text = "DROP THE WRENCH ON THE ROBOT TO MOVE IT OUT OF THE WAY!";
+            dropWrenchAudio.Play();
         }
     }
 
@@ -683,6 +722,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectTrigger.CompareTag("Welcome"))
         {
             messageText.text = "WELCOME MX37! POWER ON!";
+            welcomeAudio.Play();
         }
     }
 
@@ -690,7 +730,18 @@ public class FirstPersonControls : MonoBehaviour
     {
         if (lenaPhoto.CompareTag("Lena'sPhoto"))
         {
-            messageText.text = "THERE IS A FINAL DECISION YOU NEED TO MAKE! TAKE THIS PHOTO AND HEAD TO LENA'S OFFICE";
+            messageText.text ="TAKE THIS PHOTO AND HEAD TO LENA'S OFFICE FOR THE FINAL DECISION";
+            finalDecisionAudio.Play();
+        }
+    }
+
+
+    public void CheckSwitchOffTag()
+    {
+        if (switchOff.CompareTag("SwitchOff"))
+        {
+            messageText.text = "SWITCH OFF THE EMERGENCY SIREN";
+            switchOffSirenAudio.Play();
         }
     }
       

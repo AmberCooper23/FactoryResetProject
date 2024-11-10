@@ -27,6 +27,9 @@ TagManager:
   - Bookshelf
   - Lena'sPhoto
   - LenaPic
+  - FactoryDestroy
+  - CityDestroy
+  - SwitchOff
   layers:
   - Default
   - TransparentFX
