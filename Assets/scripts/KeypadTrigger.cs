@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class KeypadTrigger : MonoBehaviour
 {
     [SerializeField] private Keypad keypad;
     private FirstPersonControls firstPersonControls;
-    public GameObject player; 
+    public GameObject player;
+    public GameObject objectToCheck;
+    public TextMeshProUGUI messageText;
 
     private void Awake()
     {
@@ -28,6 +31,7 @@ public class KeypadTrigger : MonoBehaviour
         {
             keypad.gameObject.SetActive(false);
             keypad.Answer.text = "";
+            CheckObjectTagAndDisplayMessage(); 
         }
     }
 
@@ -39,5 +43,14 @@ public class KeypadTrigger : MonoBehaviour
         }
     }
 
+
+    private void CheckObjectTagAndDisplayMessage()
+    {
+        // Example: Check the tag of the objectToCheck and display different messages
+        if (objectToCheck.CompareTag("SafeTrigger"))
+        {
+            messageText.text = "PRESS X KEY TO EXIT KEYPAD";
+        }
+    }
 
 }

@@ -77,7 +77,7 @@ public class OpenSafeTrigger : MonoBehaviour
         // Example: Check the tag of the objectToCheck and display different messages
         if (objectToCheck.CompareTag("SafeTrigger"))
         {
-            messageText.text = "KEY WORD: ACTIVATION";
+            messageText.text = "KEY WORD: ACTIVATION. PRESS X KEY TO EXIT KEYPAD";
         }
     }
 }

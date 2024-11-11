@@ -30,7 +30,7 @@ public class KeypadForSafe : MonoBehaviour
             Door.SetBool("Open", true);
             StartCoroutine("StopDoor");
             EnablePlayerMovement();
-            keypadTrigger.SetActive(false);
+           Destroy(keypadTrigger);
         }
         else
         {

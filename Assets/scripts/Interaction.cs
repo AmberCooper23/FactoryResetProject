@@ -21,6 +21,8 @@ public class Interaction : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, interactionLayers))
         {
+            Debug.Log("Raycast hit: " + hit.collider.gameObject.name);
+
             if (hit.collider.gameObject.GetComponent<LetterScript>())
             {
                 interactionText.SetActive(true);

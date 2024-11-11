@@ -38,7 +38,7 @@ public class Door : MonoBehaviour
         // Example: Check the tag of the objectToCheck and display different messages
         if (objectToCheck.CompareTag("Dzoouh"))
         {
-            messageText.text = "FIND THE KEYCODE TO UNLOCK THE LOCKER ROOM";
+            messageText.text = "FIND THE KEYCODE TO UNLOCK THE LOCKER ROOM BY THE REGISTER";
         }
     }
 

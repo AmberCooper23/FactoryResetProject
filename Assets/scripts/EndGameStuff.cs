@@ -76,7 +76,7 @@ public class EndGameStuff : MonoBehaviour
         laser14.SetActive(true);
         laser15.SetActive(true);
         laser16.SetActive(true);
-        //book.SetActive(true);
+        book.SetActive(true);
         
 
     }
@@ -98,6 +98,6 @@ public class EndGameStuff : MonoBehaviour
         laser14.SetActive(false);
         laser15.SetActive(false);
         laser16.SetActive(false);
-        //book.SetActive(false);  
+        book.SetActive(false);  
     }
 }

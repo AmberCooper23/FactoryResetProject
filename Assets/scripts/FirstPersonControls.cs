@@ -719,7 +719,7 @@ public class FirstPersonControls : MonoBehaviour
         // Example: Check the tag of the objectToCheck and display different messages
         if (objectToCheck.CompareTag("Door2"))
         {
-            messageText.text = "SWITCH OFF THE EMERGENCY SIREN";
+            messageText.text = "SWITCH OFF THE EMERGENCY SIREN AT SWITCH";
             switchOffTheEmergencySiren.SetActive(true);
         }
     }
@@ -785,7 +785,7 @@ public class FirstPersonControls : MonoBehaviour
     {
         if (switchOff.CompareTag("SwitchOff"))
         {
-            messageText.text = "SWITCH OFF THE EMERGENCY SIREN";
+            messageText.text = "SWITCH OFF THE EMERGENCY SIREN AT SWITCH";
             switchOffSirenAudio.SetActive(true);
         }
     }
