@@ -30,6 +30,7 @@ TagManager:
   - FactoryDestroy
   - CityDestroy
   - SwitchOff
+  - letter
   layers:
   - Default
   - TransparentFX

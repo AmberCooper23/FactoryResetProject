@@ -13,10 +13,25 @@ public class LetterScript : MonoBehaviour
     private FirstPersonControls firstPersonControls;
     public GameObject player;
 
-    public AudioSource letterReading;
+    public AudioClip letterRead;
+    private AudioSource audioSource;
+
+    public bool isSpecialLetter = false;
+
+    public string specialLetterTag = "letter";
+
     private void Awake()
     {
         firstPersonControls = player.GetComponent<FirstPersonControls>();
+        audioSource = GetComponent<AudioSource>();
+
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>(); // Add an AudioSource if it doesn't exist
+        }
+
+        
     }
 
     private void OnEnable()
@@ -38,21 +53,22 @@ public class LetterScript : MonoBehaviour
         }
         if (toggle == true)
         {
-           if (CompareTag ("Letter"))
-            {
+        
                 letterUI.SetActive(true);
                 DisablePlayerMovement();
-                letterReading.Play();
 
+            if ((CompareTag(specialLetterTag) && letterRead != null))
+             {
+                PlayLetterSound();
             }
-           else
-            {
-               letterUI.SetActive(true);
-               DisablePlayerMovement();
-                letterReading.Pause();
-            }
-            
+        }
+    }
 
+    public void PlayLetterSound()
+    {
+        if (audioSource != null && letterRead != null)
+        {
+            audioSource.PlayOneShot(letterRead);
         }
     }
 

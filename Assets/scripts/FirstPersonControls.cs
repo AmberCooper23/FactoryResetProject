@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class FirstPersonControls : MonoBehaviour
 {
@@ -69,7 +70,9 @@ public class FirstPersonControls : MonoBehaviour
 
     public GameObject switchOff;
 
-  
+    public GameObject video1;
+    public GameObject video2;
+
 
     [SerializeField] private Animator ConsoleAnimation;
     [Header("Camera")]
@@ -126,16 +129,17 @@ public class FirstPersonControls : MonoBehaviour
     [Header("AUDIO IMPORTS")]
     [Space(5)]
     public AudioSource walkingClip;
-    public AudioSource pickUpClip;
-    public AudioSource dropClip;
-    public AudioSource switchOffTheEmergencySiren;
-    public AudioSource exploreTheOfficeAudio;
-    public AudioSource lookAroundForLenaPicAudio;
-    public AudioSource proceedToUnlockAudio;
-    public AudioSource dropWrenchAudio;
-    public AudioSource welcomeAudio;
-    public AudioSource finalDecisionAudio;
-    public AudioSource switchOffSirenAudio;
+
+    public GameObject pickUpClip;
+    public GameObject dropClip;
+    public GameObject switchOffTheEmergencySiren;
+    public GameObject exploreTheOfficeAudio;
+    public GameObject lookAroundForLenaPicAudio;
+    public GameObject proceedToUnlockAudio;
+    public GameObject dropWrenchAudio;
+    public GameObject welcomeAudio;
+    public GameObject finalDecisionAudio;
+    public GameObject switchOffSirenAudio;
 
     //public AudioSource computerClip;
 
@@ -181,6 +185,23 @@ public class FirstPersonControls : MonoBehaviour
         pauseMenuUI.SetActive(false);
 
     }
+
+    public void Start()
+    {
+        pickUpClip.SetActive(false);
+        dropClip.SetActive(false);
+        switchOffTheEmergencySiren.SetActive(false);
+        exploreTheOfficeAudio.SetActive(false);
+        lookAroundForLenaPicAudio.SetActive(false);
+        proceedToUnlockAudio.SetActive(false);
+        dropWrenchAudio.SetActive(false);
+        welcomeAudio.SetActive(false);
+        finalDecisionAudio.SetActive(false);
+        switchOffSirenAudio.SetActive(false);
+        video1.SetActive(false);
+        video2.SetActive(false);
+
+}
 
     private void OnEnable()
     {
@@ -581,12 +602,14 @@ public class FirstPersonControls : MonoBehaviour
             }
             else if (hit.collider.CompareTag("CityDestroy"))
             {
-                cityDestroy.SetActive(true);
+                video1.SetActive(true);
+                video2.SetActive(false);
             }
 
             else if (hit.collider.CompareTag("FactoryDestroy"))
             {
-                factoryDestroy.SetActive(true); 
+                video1.SetActive(false);
+                video2.SetActive(true);
             }
 
            
@@ -611,6 +634,28 @@ public class FirstPersonControls : MonoBehaviour
     //        lightOn = true;
     //        Debug.Log("LightTurnedOn");
     //    }
+    //}
+
+    //public void PlayVideo()
+    //{
+    //    if(videoPlayer != null)
+    //    {
+    //        rawImage.gameObject.SetActive(true);  // Show the RawImage
+    //        videoPlayer.Play();  // Start playing the video
+    //        Debug.Log("Video 1 is playing"); 
+    //    }
+        
+    //}
+
+    //public void PlayVideo2()
+    //{
+    //    if(videoPlayer2 != null)
+    //    {
+    //        rawImage2.gameObject.SetActive(true);
+    //        videoPlayer2.Play();
+    //        Debug.Log("Video 2 is playing"); 
+    //    }
+       
     //}
 
     public void TurnOffSiren()
@@ -675,7 +720,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectToCheck.CompareTag("Door2"))
         {
             messageText.text = "SWITCH OFF THE EMERGENCY SIREN";
-            switchOffTheEmergencySiren.Play();
+            switchOffTheEmergencySiren.SetActive(true);
         }
     }
 
@@ -684,7 +729,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectToCheckSwitch.CompareTag("Switch"))
         {
             messageText.text = "EXPLORE THE OFFICE FOR INFORMATION AND SUPPLIES";
-            exploreTheOfficeAudio.Play();
+            exploreTheOfficeAudio.SetActive(true);
         }
     }
 
@@ -693,7 +738,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectCheckGun.CompareTag("Gun"))
         {
             messageText.text = "LOOK AROUND FOR LENA AND THE ROBOT'S PICTURE";
-            lookAroundForLenaPicAudio.Play();
+            lookAroundForLenaPicAudio.SetActive(true);
         }
     }
 
@@ -703,7 +748,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectToCheck.CompareTag("KeyCard"))
         {
             messageText.text = "PROCEED TO UNLOCK THE OFFICE DOOR WITH THE KEYCARD";
-            proceedToUnlockAudio.Play();
+            proceedToUnlockAudio.SetActive(true);
         }
     }
 
@@ -712,7 +757,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectCheckWrench.CompareTag("PickUp"))
         {
             messageText.text = "DROP THE WRENCH ON THE ROBOT TO MOVE IT OUT OF THE WAY!";
-            dropWrenchAudio.Play();
+            dropWrenchAudio.SetActive(true);
         }
     }
 
@@ -722,7 +767,7 @@ public class FirstPersonControls : MonoBehaviour
         if (objectTrigger.CompareTag("Welcome"))
         {
             messageText.text = "WELCOME MX37! POWER ON!";
-            welcomeAudio.Play();
+            welcomeAudio.SetActive(true);
         }
     }
 
@@ -731,7 +776,7 @@ public class FirstPersonControls : MonoBehaviour
         if (lenaPhoto.CompareTag("Lena'sPhoto"))
         {
             messageText.text ="TAKE THIS PHOTO AND HEAD TO LENA'S OFFICE FOR THE FINAL DECISION";
-            finalDecisionAudio.Play();
+            finalDecisionAudio.SetActive(true);
         }
     }
 
@@ -741,7 +786,7 @@ public class FirstPersonControls : MonoBehaviour
         if (switchOff.CompareTag("SwitchOff"))
         {
             messageText.text = "SWITCH OFF THE EMERGENCY SIREN";
-            switchOffSirenAudio.Play();
+            switchOffSirenAudio.SetActive(true);
         }
     }
       

@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Interaction : MonoBehaviour
+public class InteractionForLetter : MonoBehaviour
 {
-
     [Header("EXAMINE SETTINGS")]
     [Space(5)]
     public float interactionDistance;
@@ -21,23 +19,15 @@ public class Interaction : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, interactionDistance, interactionLayers))
         {
-            if (hit.collider.gameObject.GetComponent<LetterScript>())
+            if (hit.collider.gameObject.GetComponent<letterScriptThingy>())
             {
                 interactionText.SetActive(true);
-                if (Input.GetKeyDown(KeyCode.E))
-                {
-                    hit.collider.gameObject.GetComponent<LetterScript>().openCloseLetter();
-                }
+
             }
             else
             {
                 interactionText.SetActive(false);
             }
-
-        }
-        else
-        {
-            interactionText.SetActive(false);
         }
 
     }
