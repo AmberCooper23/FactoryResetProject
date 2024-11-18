@@ -101,7 +101,7 @@ public class FirstPersonControls : MonoBehaviour
     public GameObject projectilePrefab; // Projectile prefab for shooting
     public Transform firePoint; // Point from which the projectile is fired
     public float projectileSpeed = 20f; // Speed at which the projectile is fired
-    public float pickUpRange = 3f; // Range within which objects can be picked up
+    public float pickUpRange = 15f; // Range within which objects can be picked up
     private bool holdingGun = false;
 
     [Header("PICKING UP SETTINGS")]
@@ -157,20 +157,6 @@ public class FirstPersonControls : MonoBehaviour
     public bool isJumping;
     public bool isSideWalking;
     public bool isCrouchWalking; 
-
-    [Header("Attacking")]
-    public float attackDistance = 5f;
-    public float attackDelay = 0.4f;
-    public float attackSpeed = 1f;
-    public int attackDamage = 1;
-    public LayerMask attackLayer;
-
-    
-    public AudioClip wrenchHitSound;
-
-    bool attacking = false;
-    bool readyToAttack = true;
-    int attackCount; 
 
 
     //[Header("ANIMATION SETTINGS")]

@@ -31,6 +31,7 @@ TagManager:
   - CityDestroy
   - SwitchOff
   - letter
+  - LockerNPC
   layers:
   - Default
   - TransparentFX

@@ -54,30 +54,35 @@ public class npcAI : MonoBehaviour
         }
     }
 
-    void UpdateDestination()
+    void UpdateDestination() // Both
     {
         if (wayPoints.Length == 0) return; 
         target = wayPoints[waypointIndex].position; 
         agent.SetDestination(target);
     }
 
-    void IterateWaypointIndex()
+    void IterateWaypointIndex() // Both
     {
         waypointIndex = (waypointIndex + 1) % wayPoints.Length;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision) // LockerRoom
     {
-        if (collision.gameObject.CompareTag("PickUp"))
+        if (gameObject.CompareTag("LockerNPC"))
         {
+           if (collision.gameObject.CompareTag("PickUp"))
+           {
             agent.enabled = true; 
            isMoving = true;
 
             CheckObjectTagAndDisplayMessage();
+           }
         }
+
+           
     }
 
-    private void CheckObjectTagAndDisplayMessage()
+    private void CheckObjectTagAndDisplayMessage() // LockerRoom
     {
         if (objectCheckWrench.CompareTag("PickUp"))
         {
