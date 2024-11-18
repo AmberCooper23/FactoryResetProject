@@ -60,7 +60,6 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.38f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\scripts\InteractionAgain.cs" />
     <Compile Include="Assets\scripts\PickandInspection.cs" />
     <Compile Include="Assets\scripts\InteractionForFactoryDestroy.cs" />
     <Compile Include="Assets\InteractionForTextPromptObjects.cs" />
@@ -146,6 +145,7 @@
     <Compile Include="Assets\scripts\TriggerPrompts.cs" />
     <Compile Include="Assets\scripts\ComputerScriptThing.cs" />
     <Compile Include="Assets\scripts\KeypadTrigger.cs" />
+    <Compile Include="Assets\scripts\InteractionAgain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

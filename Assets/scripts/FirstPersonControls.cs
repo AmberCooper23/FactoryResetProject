@@ -6,6 +6,7 @@
 //using UnityEditor.ShaderGraph.Drawing;
 using System;
 using System.Collections;
+using System.ComponentModel.Design;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -151,8 +152,11 @@ public class FirstPersonControls : MonoBehaviour
     [Header("ANIM CHECKS")]
     [Space(5)]
 
-    public bool Iswalking;
+    public bool isWalking;
     public bool IsCrouching;
+    public bool isJumping;
+    public bool isSideWalking;
+    public bool isCrouchWalking; 
 
     [Header("Attacking")]
     public float attackDistance = 5f;
@@ -240,6 +244,8 @@ public class FirstPersonControls : MonoBehaviour
 
         playerInput.Player.Sprint.canceled += ctx => Walking();
 
+        playerInput.Player.CrouchWalk.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); 
+
         playerInput.Player.SwitchMap.performed += ctx => SwitchActionMap();
 
         playerInput.PauseMenu.OpenPauseMenu.performed += ctx => Pause();
@@ -319,6 +325,8 @@ public class FirstPersonControls : MonoBehaviour
         if (isCrouching)
         {
             currentSpeed = crouchSpeed;
+
+
         }
         else
         {
@@ -329,18 +337,20 @@ public class FirstPersonControls : MonoBehaviour
         if (moveInput.x == 0 && moveInput.y == 0)
         {
             currentSpeed = 0;
-            Iswalking = false;  
-            animator.SetBool("IsWalking",false);
+            isWalking = false;  
+            animator.SetBool("isWalking",false);
             walkingClip.Play();
 
         }
         else
         {
             currentSpeed = moveSpeed;
-            Iswalking = true;
-            animator.SetBool("IsWalking", true);
+            isWalking = true;
+            animator.SetBool("isWalking", true);
            
         }
+
+       
 
         // Move the character controller based on the movement vector and speed
         characterController.Move(move * currentSpeed * Time.deltaTime);
@@ -416,6 +426,14 @@ public class FirstPersonControls : MonoBehaviour
         {
             // Calculate the jump velocity
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            isJumping = true;
+            animator.SetBool("isJumping", true);
+        }
+
+        else
+        {
+            isJumping=false;
+            animator.SetBool("isJumping", false);
         }
     }
 
@@ -532,16 +550,19 @@ public class FirstPersonControls : MonoBehaviour
             // Stand up
             characterController.height = standingHeight;
             isCrouching = false;
-            animator.SetBool("IsCrouching", false);
+            animator.SetBool("isCrouching", false);
         }
         else
         {
             // Crouch down
             characterController.height = crouchHeight;
             isCrouching = true;
-            animator.SetBool("IsCrouching", true); 
+            animator.SetBool("isCrouching", true); 
         }
+
     }
+
+    
 
     public void Sprinting()
     {
