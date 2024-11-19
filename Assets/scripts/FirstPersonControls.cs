@@ -101,7 +101,8 @@ public class FirstPersonControls : MonoBehaviour
     public GameObject projectilePrefab; // Projectile prefab for shooting
     public Transform firePoint; // Point from which the projectile is fired
     public float projectileSpeed = 20f; // Speed at which the projectile is fired
-    public float pickUpRange = 15f; // Range within which objects can be picked up
+    public float pickUpRange = 30f; // Range within which objects can be picked up
+    public float InteractRange = 45f;
     private bool holdingGun = false;
 
     [Header("PICKING UP SETTINGS")]
@@ -113,6 +114,8 @@ public class FirstPersonControls : MonoBehaviour
     [Header("CROUCH SETTINGS")]
     [Space(5)]
     public float crouchHeight = 2f; // Height of the player when crouching
+    public GameObject CrouchCamPos;
+    public GameObject StandingCamPos;
     public float standingHeight = 3.41f; // Height of the player when standing
     public float crouchSpeed = 2.5f; // Speed at which the player moves when crouching
     private bool isCrouching = false; // Whether the player is currently crouching
@@ -337,6 +340,19 @@ public class FirstPersonControls : MonoBehaviour
         }
 
        
+        if( moveInput.x > 0 || moveInput.x < 0f) 
+        {
+            Debug.Log("walk sideways");
+            animator.SetBool("isSideWalking", true); 
+            isSideWalking = true;
+        }
+
+        else
+        {
+            animator.SetBool("isSideWalking", false);
+            isSideWalking = false;
+        }
+
 
         // Move the character controller based on the movement vector and speed
         characterController.Move(move * currentSpeed * Time.deltaTime);
@@ -412,15 +428,17 @@ public class FirstPersonControls : MonoBehaviour
         {
             // Calculate the jump velocity
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            isJumping = true;
-            animator.SetBool("isJumping", true);
+            //isJumping = true;
+            //animator.SetBool("isJumping", true); 
         }
 
-        else
-        {
-            isJumping=false;
-            animator.SetBool("isJumping", false);
-        }
+        //else
+        //{
+        //    velocity.y = Mathf.Sqrt(jumpHeight * -2f *  -gravity);
+        //    isJumping = false;
+        //    animator.SetBool("isJumping", false);   
+        //}
+       
     }
 
     public void Shoot()
@@ -455,7 +473,7 @@ public class FirstPersonControls : MonoBehaviour
         RaycastHit hit;
 
         // Debugging: Draw the ray in the Scene view
-        Debug.DrawRay(playerCamera.position, playerCamera.forward * pickUpRange, Color.red, 15f);
+        Debug.DrawRay(playerCamera.position, playerCamera.forward * pickUpRange, Color.red, 3f);
 
 
         if (Physics.Raycast(ray, out hit, pickUpRange))
@@ -535,15 +553,19 @@ public class FirstPersonControls : MonoBehaviour
         {
             // Stand up
             characterController.height = standingHeight;
-            isCrouching = false;
             animator.SetBool("isCrouching", false);
+            playerCamera.transform.position = StandingCamPos.transform.position;
+            isCrouching = false;
+         
         }
         else
         {
             // Crouch down
             characterController.height = crouchHeight;
+            animator.SetBool("isCrouching", true);
+            playerCamera.transform.position = CrouchCamPos.transform.position;
             isCrouching = true;
-            animator.SetBool("isCrouching", true); 
+            
         }
 
     }
@@ -571,7 +593,7 @@ public class FirstPersonControls : MonoBehaviour
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, pickUpRange))
+        if (Physics.Raycast(ray, out hit, InteractRange))
         {
             if (hit.collider.CompareTag("Switch")) // Assuming the switch has this tag
             {
