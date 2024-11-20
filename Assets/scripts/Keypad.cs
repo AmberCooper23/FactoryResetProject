@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class Keypad : MonoBehaviour
 {
-    public Text Answer;
+    //public TextMeshPro Answer;
+    public TextMeshProUGUI answer;
     [SerializeField] private Animator Door;
     private string correctCode = "123456";
     private KeypadTrigger trigger;
@@ -23,14 +24,14 @@ public class Keypad : MonoBehaviour
 
     public void Number(int number)
     {
-        Answer.text += number.ToString();
+        answer.text += number.ToString();
     }
 
     public void Execute()
     {
-        if (Answer.text == correctCode)
+        if (answer.text == correctCode)
         {
-            Answer.text = "OPENED";
+            answer.text = "OPENED";
             Door.SetBool("Open", true);
             StartCoroutine("StopDoor");
             EnablePlayerMovement();
@@ -38,7 +39,7 @@ public class Keypad : MonoBehaviour
         }
         else
         {
-            Answer.text = "";
+            answer.text = "";
         }
     }
 

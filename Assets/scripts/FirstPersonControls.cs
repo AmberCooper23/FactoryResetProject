@@ -94,7 +94,8 @@ public class FirstPersonControls : MonoBehaviour
     private float verticalLookRotation = 0f; // Keeps track of vertical camera rotation for clamping
     private Vector3 velocity; // Velocity of the player
     private CharacterController characterController; // Reference to the CharacterController component
-    public float sprintSpeed = 5f; 
+    public float sprintSpeed = 5f;
+    public bool jumpingNow;
 
     [Header("SHOOTING SETTINGS")]
     [Space(5)]
@@ -259,30 +260,7 @@ public class FirstPersonControls : MonoBehaviour
         Move();
         LookAround();
         ApplyGravity();
-
-        /*        Debug.Log(transform.position);
-
-                if (Open && Hinge.rotation.y < 0.9f)
-                {
-                    Hinge.Rotate(0, 140 * Time.deltaTime, 0);
-                }
-                else if (Hinge.rotation.y > 0.9f)
-                {
-                    Open = false;
-                }
-                Debug.Log(Hinge.rotation.y);
-
-                if(OpenDoor2 && Hinge2.rotation.y < 0.9f)
-                {
-                    Hinge2.Rotate(0, 140 * Time.deltaTime, 0);
-                }
-                else if (Hinge2.rotation.y > 0.9f)
-                {
-                    OpenDoor2 = false;
-                }
-                Debug.Log(Hinge2.rotation.y);*/
-
-
+        HandleJumpAnimations();
     }
 
 
@@ -423,22 +401,35 @@ public class FirstPersonControls : MonoBehaviour
 
 
     public void Jump()
-    {
+    {            
         if (characterController.isGrounded)
         {
             // Calculate the jump velocity
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            //isJumping = true;
-            //animator.SetBool("isJumping", true); 
         }
 
-        //else
-        //{
-        //    velocity.y = Mathf.Sqrt(jumpHeight * -2f *  -gravity);
-        //    isJumping = false;
-        //    animator.SetBool("isJumping", false);   
-        //}
-       
+    }
+
+    public void HandleJumpAnimations()
+    {
+        if (velocity.y == 0f)
+        {
+            animator.SetBool("isFalling", false);
+        }
+        else if (velocity.y < -0.2)
+        {
+            animator.SetBool("isFalling", true);
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isJumping", false);
+        }
+        else if (velocity.y > 0.2)
+        {
+            animator.SetBool("isJumping", true);
+            animator.SetBool("isFalling", false);
+            animator.SetBool("isWalking", false);
+        }
+        
+
     }
 
     public void Shoot()
@@ -473,7 +464,7 @@ public class FirstPersonControls : MonoBehaviour
         RaycastHit hit;
 
         // Debugging: Draw the ray in the Scene view
-        Debug.DrawRay(playerCamera.position, playerCamera.forward * pickUpRange, Color.red, 3f);
+        Debug.DrawRay(playerCamera.position, playerCamera.forward * pickUpRange, Color.red, 15f);
 
 
         if (Physics.Raycast(ray, out hit, pickUpRange))

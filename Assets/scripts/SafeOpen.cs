@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro; 
 
 public class KeypadForSafe : MonoBehaviour
 {
-    public Text AnswerForSafe;
+    public TextMeshProUGUI AnswerForSafe;
     [SerializeField] private Animator Door;
     private string correctCode = "12178445";
     private FirstPersonControls firstPersonControls;

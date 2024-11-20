@@ -30,7 +30,7 @@ public class KeypadTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             keypad.gameObject.SetActive(false);
-            keypad.Answer.text = "";
+            keypad.answer.text = "";
             CheckObjectTagAndDisplayMessage(); 
         }
     }
