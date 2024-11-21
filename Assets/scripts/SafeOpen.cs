@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; 
+using TMPro;
+using UnityEngine.InputSystem;
 
 public class KeypadForSafe : MonoBehaviour
 {
-    public TextMeshProUGUI AnswerForSafe;
+    public TextMeshProUGUI answer;
     [SerializeField] private Animator Door;
     private string correctCode = "12178445";
     private FirstPersonControls firstPersonControls;
@@ -20,22 +21,22 @@ public class KeypadForSafe : MonoBehaviour
 
     public void Number(int number)
     {
-        AnswerForSafe.text += number.ToString();
+        answer.text += number.ToString();
     }
 
     public void Execute()
     {
-        if (AnswerForSafe.text == correctCode)
+        if (answer.text == correctCode)
         {
-            AnswerForSafe.text = "OPENED";
+            answer.text = "OPENED";
             Door.SetBool("Open", true);
             StartCoroutine("StopDoor");
             EnablePlayerMovement();
-           Destroy(keypadTrigger);
+           
         }
         else
         {
-            AnswerForSafe.text = "";
+            answer.text = "";
         }
     }
 

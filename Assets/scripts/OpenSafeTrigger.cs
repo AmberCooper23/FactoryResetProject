@@ -42,7 +42,7 @@ public class OpenSafeTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             keypad.gameObject.SetActive(false);
-            keypad.AnswerForSafe.text = "";
+            keypad.answer.text = "";
         }
     }
 

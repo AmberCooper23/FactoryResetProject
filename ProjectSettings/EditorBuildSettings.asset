@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/EndScene.unity
     guid: 25d04515ae9fea049a9780935597bf62
+  - enabled: 1
+    path: Assets/Scenes/CityDestroy.unity
+    guid: da580a380ead3b44c8c10455aada0c57
+  - enabled: 1
+    path: Assets/Scenes/FactoryDestroy.unity
+    guid: ca0ec2bc266698f4e8a7b3d0cb39f4ab
   m_configObjects: {}

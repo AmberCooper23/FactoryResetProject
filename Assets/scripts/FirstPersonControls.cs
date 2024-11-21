@@ -74,6 +74,8 @@ public class FirstPersonControls : MonoBehaviour
     public GameObject video1;
     public GameObject video2;
 
+   
+
 
     [SerializeField] private Animator ConsoleAnimation;
     [Header("Camera")]
@@ -119,7 +121,6 @@ public class FirstPersonControls : MonoBehaviour
     public GameObject StandingCamPos;
     public float standingHeight = 3.41f; // Height of the player when standing
     public float crouchSpeed = 2.5f; // Speed at which the player moves when crouching
-    private bool isCrouching = false; // Whether the player is currently crouching
 
     [Header("INTERACT SETTINGS")]
     [Space(5)]
@@ -169,6 +170,8 @@ public class FirstPersonControls : MonoBehaviour
 
 
     public GameObject pausePage;
+
+    private bool isPaused = false;
     private void Awake()
     {
         // Get and store the CharacterController component attached to this GameObject
@@ -176,7 +179,7 @@ public class FirstPersonControls : MonoBehaviour
         playerInput = new PlayerController();
         audioSource = GetComponent<AudioSource>();
 
-        pauseMenuUI.SetActive(false);
+        //pauseMenuUI.SetActive(false);
 
     }
 
@@ -209,6 +212,9 @@ public class FirstPersonControls : MonoBehaviour
         playerInput.Player.Movement.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); // Update moveInput when movement input is performed
         playerInput.Player.Movement.canceled += ctx => moveInput = Vector2.zero; // Reset moveInput when movement input is canceled
 
+        playerInput.Player.CrouchWalk.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); // Update moveInput when movement input is performed
+        playerInput.Player.CrouchWalk.canceled += ctx => moveInput = Vector2.zero; // Reset moveInput when movement input is canceled
+
         // Subscribe to the look input events
         playerInput.Player.Look.performed += ctx => lookInput = ctx.ReadValue<Vector2>(); // Update lookInput when look input is performed
         playerInput.Player.Look.canceled += ctx => lookInput = Vector2.zero; // Reset lookInput when look input is canceled
@@ -234,11 +240,9 @@ public class FirstPersonControls : MonoBehaviour
 
         playerInput.Player.Sprint.canceled += ctx => Walking();
 
-        playerInput.Player.CrouchWalk.performed += ctx => moveInput = ctx.ReadValue<Vector2>(); 
+        //playerInput.Player.SwitchMap.performed += ctx => SwitchActionMap();
 
-        playerInput.Player.SwitchMap.performed += ctx => SwitchActionMap();
-
-        playerInput.PauseMenu.OpenPauseMenu.performed += ctx => Pause();
+        //playerInput.PauseMenu.OpenPauseMenu.performed += ctx => Pause();
 
         playerInput.MainMenu.Back.performed += ctx => BackButton();
 
@@ -254,6 +258,7 @@ public class FirstPersonControls : MonoBehaviour
     }
 
 
+
     private void Update()
     {
         // Call Move and LookAround methods every frame to handle player movement and camera rotation
@@ -261,22 +266,24 @@ public class FirstPersonControls : MonoBehaviour
         LookAround();
         ApplyGravity();
         HandleJumpAnimations();
-    }
 
-
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        /*if (hit.collider.gameObject.CompareTag("Step"))
+        if (IsCrouching)
         {
-            Open = true;
+            animator.SetBool("isCrouching", true);
+
         }
-
-        if (hit.collider.gameObject.CompareTag("Clap"))
+        else
         {
-            OpenDoor2 = true; 
-        }*/
+
+            animator.SetBool("isCrouching", false);
+        }
     }
+
+
+
+
+
+   
 
 
     public void Move()
@@ -289,7 +296,7 @@ public class FirstPersonControls : MonoBehaviour
 
         // Adjust speed if crouching
         float currentSpeed;
-        if (isCrouching)
+        if (IsCrouching)
         {
             currentSpeed = crouchSpeed;
 
@@ -345,34 +352,41 @@ public class FirstPersonControls : MonoBehaviour
     
     public void PauseGame()
     {
-       playerInput.Player.Disable();
+        isPaused = true;
         playerInput.PauseMenu.Enable();
         pauseMenuUI.SetActive(true);
+        Time.timeScale = 0;
+        Debug.Log("Whoa! Pause!");
     }
 
     public void ResumeScreen()
     {
+        isPaused = false;   
         playerInput.MainMenu.Disable();
        playerInput.Player.Enable();
         pauseMenuUI.SetActive(false);
+        Time.timeScale = 1;
+        Debug.Log("Play on playa!");
+        
     }
     public void BackButton()
     {
 
     }
-    public void SwitchActionMap()
-    {
-        playerInput.Player.Disable();
-        playerInput.Computer.Enable();
-    }
-    private void Pause()
-    {
-        pauseMenuUI.SetActive(true);
-        //Time.timeScale = 0f;
-        GameIsPaused = true;
-    }
+    //public void SwitchActionMap()
+    //{
+    //    playerInput.Player.Disable();
+    //    playerInput.Computer.Enable();
+    //}
+    //private void Pause()
+    //{
+    //    pauseMenuUI.SetActive(true);
+    //    Time.timeScale = 0f;
+    //    GameIsPaused = true;
+    //}
     public void LookAround()
     {
+        if (isPaused) return;
         // Get horizontal and vertical look inputs and adjust based on sensitivity
         float LookX = lookInput.x * lookSpeed;
         float LookY = lookInput.y * lookSpeed;
@@ -419,14 +433,14 @@ public class FirstPersonControls : MonoBehaviour
         else if (velocity.y < -0.2)
         {
             animator.SetBool("isFalling", true);
-            animator.SetBool("isWalking", false);
+            //animator.SetBool("isWalking", false);
             animator.SetBool("isJumping", false);
         }
         else if (velocity.y > 0.2)
         {
             animator.SetBool("isJumping", true);
             animator.SetBool("isFalling", false);
-            animator.SetBool("isWalking", false);
+            //animator.SetBool("isWalking", false);
         }
         
 
@@ -540,28 +554,33 @@ public class FirstPersonControls : MonoBehaviour
 
     public void ToggleCrouch()
     {
-        if (isCrouching)
+        if (IsCrouching)
         {
+            Debug.Log("DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+
             // Stand up
             characterController.height = standingHeight;
-            animator.SetBool("isCrouching", false);
             playerCamera.transform.position = StandingCamPos.transform.position;
-            isCrouching = false;
+            isCrouchWalking = false;
+            IsCrouching = false ;
          
         }
-        else
+        else if (!IsCrouching) 
         {
             // Crouch down
             characterController.height = crouchHeight;
-            animator.SetBool("isCrouching", true);
             playerCamera.transform.position = CrouchCamPos.transform.position;
-            isCrouching = true;
-            
+            isCrouchWalking = true;
+            IsCrouching = true;
+
+
+
         }
 
     }
 
-    
+   
+
 
     public void Sprinting()
     {
@@ -586,6 +605,7 @@ public class FirstPersonControls : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, InteractRange))
         {
+             
             if (hit.collider.CompareTag("Switch")) // Assuming the switch has this tag
             {
                 doorLock.SetActive(false); 
@@ -624,12 +644,14 @@ public class FirstPersonControls : MonoBehaviour
             {
                 video1.SetActive(true);
                 video2.SetActive(false);
+                Debug.Log("City Destroy");
             }
 
             else if (hit.collider.CompareTag("FactoryDestroy"))
             {
                 video1.SetActive(false);
                 video2.SetActive(true);
+                Debug.Log("FactoryDestroy"); 
             }
 
            
@@ -687,7 +709,7 @@ public class FirstPersonControls : MonoBehaviour
     private IEnumerator SlideDoor(GameObject door)
     {
         float slideAmount = 8f; // The total distance the door will be raised
-        float slideSpeed = 2f; // The speed at which the door will be raised
+        float slideSpeed = 1f; // The speed at which the door will be raised
         Vector3 startPosition = door.transform.position; // Store the initial position of the door
         Vector3 endPosition = startPosition + (Vector3.up * slideAmount); // Calculate the final position of the door after raising
 
@@ -699,6 +721,7 @@ public class FirstPersonControls : MonoBehaviour
             yield return null; // Wait until the next frame before continuing the loop
         }
     }
+
 
     private IEnumerator BringUpControlPanel()
     {

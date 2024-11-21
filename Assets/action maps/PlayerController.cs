@@ -454,6 +454,17 @@ public partial class @PlayerController: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""4cbfc1fe-1c37-49a8-9355-f6273a909621"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""053eec54-6fea-481e-ad00-412e5dcbb9bb"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
