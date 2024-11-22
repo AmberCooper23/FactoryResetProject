@@ -26,7 +26,9 @@ public class TriggerPrompts : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             promptText.SetActive(false);
-            Destroy(promptTrigger);
+           
         }
     }
+
+
 }

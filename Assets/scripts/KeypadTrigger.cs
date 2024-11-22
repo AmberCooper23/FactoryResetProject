@@ -21,7 +21,8 @@ public class KeypadTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             keypad.gameObject.SetActive(true);
-            DisablePlayerMovement(); 
+            DisablePlayerMovement();
+            CheckObjectTagAndDisplayMessage();
         }
     }
 
@@ -31,7 +32,6 @@ public class KeypadTrigger : MonoBehaviour
         {
             keypad.gameObject.SetActive(false);
             keypad.answer.text = "";
-            CheckObjectTagAndDisplayMessage(); 
         }
     }
 
@@ -47,10 +47,11 @@ public class KeypadTrigger : MonoBehaviour
     private void CheckObjectTagAndDisplayMessage()
     {
         // Example: Check the tag of the objectToCheck and display different messages
-        if (objectToCheck.CompareTag("SafeTrigger"))
+        if (objectToCheck.CompareTag("KeypadTrigger"))
         {
             messageText.text = "PRESS X KEY TO EXIT KEYPAD";
         }
+        
     }
 
 }

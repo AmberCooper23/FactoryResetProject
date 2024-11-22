@@ -32,6 +32,10 @@ TagManager:
   - SwitchOff
   - letter
   - LockerNPC
+  - ShootGun
+  - Frame
+  - Activation
+  - KeypadTrigger
   layers:
   - Default
   - TransparentFX

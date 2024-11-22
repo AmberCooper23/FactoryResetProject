@@ -71,11 +71,12 @@ public class FirstPersonControls : MonoBehaviour
 
     public GameObject switchOff;
 
+    public GameObject shootGun; 
+
     public GameObject video1;
     public GameObject video2;
 
-   
-
+    public bool isFiring = false;
 
     [SerializeField] private Animator ConsoleAnimation;
     [Header("Camera")]
@@ -111,6 +112,7 @@ public class FirstPersonControls : MonoBehaviour
     [Header("PICKING UP SETTINGS")]
     [Space(5)]
     public Transform holdPosition; // Position where the picked-up object will be held
+    public Transform gunHoldPosition; 
     private GameObject heldObject; // Reference to the currently held object
 
     // Crouch settings
@@ -224,6 +226,8 @@ public class FirstPersonControls : MonoBehaviour
 
         // Subscribe to the shoot input event
         playerInput.Player.Shoot.performed += ctx => Shoot(); // Call the Shoot method when shoot input is performed
+
+        playerInput.Player.Shoot.canceled += ctx => ShootStopped(); 
 
         // Subscribe to the pick-up input event
         playerInput.Player.PickUp.performed += ctx => PickUpObject(); // Call the PickUpObject method when pick-up input is performed
@@ -450,16 +454,28 @@ public class FirstPersonControls : MonoBehaviour
     {
         if (holdingGun == true)
         {
-            // Instantiate the projectile at the fire point
-            GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+            if (!isFiring)
+            {
 
-            // Get the Rigidbody component of the projectile and set its velocity
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            rb.velocity = firePoint.forward * projectileSpeed;
 
-            // Destroy the projectile after 3 seconds
-            Destroy(projectile, 3f);
+                isFiring = true;
+                // Instantiate the projectile at the fire point
+                GameObject projectile = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+
+                // Get the Rigidbody component of the projectile and set its velocity
+                Rigidbody rb = projectile.GetComponent<Rigidbody>();
+                rb.velocity = firePoint.forward * projectileSpeed;
+
+                // Destroy the projectile after 3 seconds
+                Destroy(projectile, 3f);
+            }
         }
+      
+    }
+
+    public void ShootStopped()
+    {
+        isFiring = false;
     }
 
     public void PickUpObject()
@@ -506,9 +522,9 @@ public class FirstPersonControls : MonoBehaviour
                 heldObject.GetComponent<Rigidbody>().isKinematic = true; // Disable physics
 
                 // Attach the object to the hold position
-                heldObject.transform.position = holdPosition.position;
-                heldObject.transform.rotation = holdPosition.rotation;
-                heldObject.transform.parent = holdPosition;
+                heldObject.transform.position = gunHoldPosition.position;
+                heldObject.transform.rotation = gunHoldPosition.rotation;
+                heldObject.transform.parent = gunHoldPosition;
 
                 holdingGun = true;
 
@@ -531,7 +547,7 @@ public class FirstPersonControls : MonoBehaviour
                 CheckKeycardAndDisplayMessage();
             }
 
-            else if (hit.collider.CompareTag("LenaPic"))
+            else if (hit.collider.CompareTag("Lena'sPhoto"))
             {
                 Debug.Log("Retrieved Lena's Photo");
                 heldObject = hit.collider.gameObject;
@@ -741,6 +757,11 @@ public class FirstPersonControls : MonoBehaviour
         {
             CheckSwitchOffTag();
         }
+
+       else if (other.gameObject.CompareTag("ShootGun"))
+        {
+            CheckShootTrigger(); 
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -749,12 +770,19 @@ public class FirstPersonControls : MonoBehaviour
         {
             welcomeText.SetActive(false);
             Destroy(objectTrigger); 
+
         }
 
        else if (other.CompareTag("SwitchOff"))
         {
             Destroy(switchOff);
         }
+
+       else if (other.CompareTag("ShootGun"))
+        {
+            Destroy(shootGun);
+        }
+
     }
 
     private void CheckDoor2TagAndDisplayMessage()
@@ -830,6 +858,15 @@ public class FirstPersonControls : MonoBehaviour
         {
             messageText.text = "SWITCH OFF THE EMERGENCY SIREN AT SWITCH";
             switchOffSirenAudio.SetActive(true);
+        }
+    }
+
+
+    public void CheckShootTrigger()
+    {
+        if (shootGun.CompareTag("ShootGun"))
+        {
+            messageText.text = "SHOOT CARDBOARD BOXES TO PROGRESS TO VENTS"; 
         }
     }
       

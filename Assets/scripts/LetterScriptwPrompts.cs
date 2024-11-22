@@ -72,5 +72,9 @@ public class LetterScriptwPrompts : MonoBehaviour
         {
             messageText.text = "YOU HAVE FOUND THE SAFE KEYCODE. YOU MAY NOW UNLOCK THE SAFE";
         }
+        else if (objectToCheck.CompareTag("Frame"))
+        {
+            messageText.text = "PROCEED TO THE PREVIOUSLY LOCKED DOOR FROM THE BEGINNING";
+        }
     }
 }
